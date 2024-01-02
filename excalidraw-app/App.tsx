@@ -750,6 +750,7 @@ const ExcalidrawWrapper = () => {
             />
           );
         }}
+        aiEnabled={false}
       >
         <AppMainMenu
           setCollabDialogShown={setCollabDialogShown}
