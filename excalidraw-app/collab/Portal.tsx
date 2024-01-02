@@ -22,7 +22,7 @@ import { PRECEDING_ELEMENT_KEY } from "../../packages/excalidraw/constants";
 
 class Portal {
   collab: TCollabClass;
-  socket: SocketIOClient.Socket | null = null;
+  socket: any | null = null;
   socketInitialized: boolean = false; // we don't want the socket to emit any updates until it is fully initialized
   roomId: string | null = null;
   roomKey: string | null = null;
@@ -32,7 +32,7 @@ class Portal {
     this.collab = collab;
   }
 
-  open(socket: SocketIOClient.Socket, id: string, key: string) {
+  open(socket: any, id: string, key: string) {
     this.socket = socket;
     this.roomId = id;
     this.roomKey = key;

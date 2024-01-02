@@ -42,7 +42,7 @@ const SCENE_VERSION_LENGTH_BYTES = 4
 // to prevent modifying upstream files and ease futur maintenance of this fork
 
 const httpStorageSceneVersionCache = new WeakMap<
-  SocketIOClient.Socket,
+  any,
   number
 >();
 
@@ -123,7 +123,7 @@ export const saveToHttpStorage = async (
 export const loadFromHttpStorage = async (
   roomId: string,
   roomKey: string,
-  socket: SocketIOClient.Socket | null,
+  socket: any | null,
 ): Promise<readonly ExcalidrawElement[] | null> => {
   const getResponse = await fetch(
     `${httpStorageBackendUrl}/rooms/${roomId}`,
