@@ -1,5 +1,6 @@
 .DS_Store
 .env.development.local
+.env.development
 .env.local
 .env
 .env.production.local
@@ -13,6 +14,8 @@
 .yarn
 *.log
 *.tgz
+*.crt
+*.key
 build
 dist
 firebase

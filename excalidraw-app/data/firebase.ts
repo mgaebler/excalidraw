@@ -21,7 +21,6 @@ import { MIME_TYPES } from "../../packages/excalidraw/constants";
 import { reconcileElements } from "../collab/reconciliation";
 import { getSyncableElements, SyncableExcalidrawElement } from ".";
 import { ResolutionType } from "../../packages/excalidraw/utility-types";
-import { Socket } from "socket.io-client";
 
 // private
 // -----------------------------------------------------------------------------

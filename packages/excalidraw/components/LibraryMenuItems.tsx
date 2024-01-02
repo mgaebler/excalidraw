@@ -43,6 +43,7 @@ export default function LibraryMenuItems({
   onInsertLibraryItems,
   pendingElements,
   theme,
+  featureFlagLibraryButton,
   id,
   libraryReturnUrl,
   onSelectItems,
@@ -55,6 +56,7 @@ export default function LibraryMenuItems({
   onAddToLibrary: (elements: LibraryItem["elements"]) => void;
   libraryReturnUrl: ExcalidrawProps["libraryReturnUrl"];
   theme: UIAppState["theme"];
+  featureFlagLibraryButton: boolean;
   id: string;
   selectedItems: LibraryItem["id"][];
   onSelectItems: (id: LibraryItem["id"][]) => void;
@@ -287,14 +289,15 @@ export default function LibraryMenuItems({
         </>
 
         <>
-          {(publishedItems.length > 0 ||
+          {featureFlagLibraryButton && (
+            publishedItems.length > 0 ||
             pendingElements.length > 0 ||
             unpublishedItems.length > 0) && (
             <div className="library-menu-items-container__header library-menu-items-container__header--excal">
               {t("labels.excalidrawLib")}
             </div>
           )}
-          {publishedItems.length > 0 ? (
+          {featureFlagLibraryButton && publishedItems.length > 0 ? (
             <LibraryMenuSectionGrid>
               <LibraryMenuSection
                 itemsRenderedPerBatch={itemsRenderedPerBatch}

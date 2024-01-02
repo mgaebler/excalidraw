@@ -222,6 +222,8 @@
     .zIndexButton {
       @include outlineButtonStyles;
 
+      background-color: transparent;
+
       padding: 0;
 
       svg {
@@ -459,6 +461,26 @@
 
     &:active {
       border: 1px solid var(--button-active-border);
+    }
+  }
+
+  .info-icon {
+    display: flex;
+    cursor: pointer;
+    fill: $oc-gray-6;
+    padding: 0;
+    margin: 0;
+    margin-left: 5px;
+    background: none;
+    color: var(--icon-fill-color);
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    &:hover {
+      background: none;
     }
   }
 

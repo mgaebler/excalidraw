@@ -8,15 +8,15 @@ services:
       target: production
     container_name: excalidraw
     ports:
-      - "5010:80"
+      - "5010:3000"
     restart: always
     healthcheck:
       disable: true
     environment:
       - NODE_ENV=production
-
+      - NGINX_PORT=3000
   excalidraw-storage-backend:
-    build: 
+    build:
       context: https://github.com/kitsteam/excalidraw-storage-backend.git#main
       target: production
     ports:

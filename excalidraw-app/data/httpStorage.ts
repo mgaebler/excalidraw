@@ -18,7 +18,24 @@ import Portal from "../collab/Portal";
 import { reconcileElements } from "../collab/reconciliation";
 import { StoredScene } from "./StorageBackend";
 
-const HTTP_STORAGE_BACKEND_URL = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL;
+const apiPath = '/api/v2'
+const scenePath = '/scenes/'
+export const sceneApiPath = apiPath + scenePath
+
+export const createServerUrl = (targetSubdomain: string, postFix?: string): string => {
+  const hostArray = window.location.host.split('.')
+  const protocol =  window.location.protocol + '//'
+  if(hostArray.length === 1) console.warn("localhost does not work for URL_PART_NAME variables");
+
+  // Kits domains for excali start with draw
+  const subdomain = hostArray[0].replace('draw', targetSubdomain)
+
+  return `${protocol}${subdomain}.${hostArray.slice(1, hostArray.length).join('.')}${postFix ? postFix : ''}`
+}
+
+const httpStorageBackendUrl = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME ?
+  createServerUrl(import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME, apiPath) :
+  `${import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL}${apiPath}` 
 const SCENE_VERSION_LENGTH_BYTES = 4
 
 // There is a lot of intentional duplication with the firebase file
@@ -62,7 +79,7 @@ export const saveToHttpStorage = async (
 
   const sceneVersion = getSceneVersion(elements);
   const getResponse = await fetch(
-    `${HTTP_STORAGE_BACKEND_URL}/rooms/${roomId}`,
+    `${httpStorageBackendUrl}/rooms/${roomId}`,
   );
 
   if (!getResponse.ok && getResponse.status !== 404) {
@@ -108,9 +125,8 @@ export const loadFromHttpStorage = async (
   roomKey: string,
   socket: SocketIOClient.Socket | null,
 ): Promise<readonly ExcalidrawElement[] | null> => {
-  const HTTP_STORAGE_BACKEND_URL = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL;
   const getResponse = await fetch(
-    `${HTTP_STORAGE_BACKEND_URL}/rooms/${roomId}`,
+    `${httpStorageBackendUrl}/rooms/${roomId}`,
   );
 
   const buffer = await getResponse.arrayBuffer();
@@ -148,14 +164,12 @@ export const saveFilesToHttpStorage = async ({
   const erroredFiles = new Map<FileId, true>();
   const savedFiles = new Map<FileId, true>();
 
-  const HTTP_STORAGE_BACKEND_URL = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL;
-
   await Promise.all(
     files.map(async ({ id, buffer }) => {
       try {
         const payloadBlob = new Blob([buffer]);
         const payload = await new Response(payloadBlob).arrayBuffer();
-        await fetch(`${HTTP_STORAGE_BACKEND_URL}/files/${id}`, {
+        await fetch(`${httpStorageBackendUrl}/files/${id}`, {
           method: "PUT",
           body: payload,
         });
@@ -181,8 +195,7 @@ export const loadFilesFromHttpStorage = async (
   await Promise.all(
     [...new Set(filesIds)].map(async (id) => {
       try {
-        const HTTP_STORAGE_BACKEND_URL = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL;
-        const response = await fetch(`${HTTP_STORAGE_BACKEND_URL}/files/${id}`);
+        const response = await fetch(`${httpStorageBackendUrl}/files/${id}`);
         if (response.status < 400) {
           const arrayBuffer = await response.arrayBuffer();
 
@@ -225,7 +238,7 @@ const saveElementsToBackend = async (roomKey: string, roomId: string, elements: 
   const sceneVersionBuffer = numberView.buffer;
   const payloadBlob = await new Response(new Blob([sceneVersionBuffer, iv.buffer, ciphertext])).arrayBuffer();
   const putResponse = await fetch(
-    `${HTTP_STORAGE_BACKEND_URL}/rooms/${roomId}`,
+    `${httpStorageBackendUrl}/rooms/${roomId}`,
     {
       method: "PUT",
       body: payloadBlob,

@@ -604,7 +604,7 @@ export const renderElement = (
           element.x + appState.scrollX,
           element.y + appState.scrollY,
         );
-        context.fillStyle = "rgba(0, 0, 200, 0.04)";
+        context.fillStyle = "rgba(0, 103, 167, 0.04)";
 
         context.lineWidth = FRAME_STYLE.strokeWidth / appState.zoom.value;
         context.strokeStyle = FRAME_STYLE.strokeColor;
@@ -612,7 +612,7 @@ export const renderElement = (
         // TODO change later to only affect AI frames
         if (isMagicFrameElement(element)) {
           context.strokeStyle =
-            appState.theme === "light" ? "#7affd7" : "#1d8264";
+            appState.theme === "light" ? "rgb(0, 163, 211)" : "rgb(0, 163, 211)";
         }
 
         if (FRAME_STYLE.radius && context.roundRect) {

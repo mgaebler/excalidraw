@@ -35,6 +35,7 @@ import {
 } from "../app_constants";
 import { encodeFilesForUpload } from "./FileManager";
 import { getStorageBackend } from "./config";
+import { createServerUrl, sceneApiPath } from "./httpStorage";
 
 export type SyncableExcalidrawElement = ExcalidrawElement & {
   _brand: "SyncableExcalidrawElement";
@@ -57,8 +58,12 @@ export const getSyncableElements = (elements: readonly ExcalidrawElement[]) =>
     isSyncableElement(element),
   ) as SyncableExcalidrawElement[];
 
-const BACKEND_V2_GET = import.meta.env.VITE_APP_BACKEND_V2_GET_URL;
-const BACKEND_V2_POST = import.meta.env.VITE_APP_BACKEND_V2_POST_URL;
+const BACKEND_V2_GET = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME ?
+  createServerUrl(import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME, sceneApiPath) :
+  import.meta.env.VITE_APP_BACKEND_V2_GET_URL + sceneApiPath
+const BACKEND_V2_POST = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME ?
+  createServerUrl(import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME, sceneApiPath) :
+  import.meta.env.VITE_APP_BACKEND_V2_POST_URL + sceneApiPath
 
 const generateRoomId = async () => {
   const buffer = new Uint8Array(ROOM_ID_BYTES);
@@ -77,7 +82,12 @@ export const getCollabServer = async (): Promise<{
   url: string;
   polling: boolean;
 }> => {
-  if (import.meta.env.VITE_APP_WS_SERVER_URL) {
+  if(import.meta.env.VITE_APP_HTTP_STORAGE_WS_URL_PART_NAME) {
+    return {
+      url: createServerUrl(import.meta.env.VITE_APP_HTTP_STORAGE_WS_URL_PART_NAME),
+      polling: true,
+    };
+  } else if (import.meta.env.VITE_APP_WS_SERVER_URL) {
     return {
       url: import.meta.env.VITE_APP_WS_SERVER_URL,
       polling: true,

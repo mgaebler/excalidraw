@@ -57,3 +57,8 @@ export interface ImportedLibraryData extends Partial<ExportedLibraryData> {
   /** @deprecated v1 */
   library?: LibraryItems;
 }
+
+export interface KitsLastUsedState {
+  link: string;
+  createdAt: Date;
+}
