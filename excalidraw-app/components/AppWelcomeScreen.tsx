@@ -43,7 +43,9 @@ export const AppWelcomeScreen: React.FC<{
       <WelcomeScreen.Hints.ToolbarHint />
       <WelcomeScreen.Hints.HelpHint />
       <WelcomeScreen.Center>
-        <WelcomeScreen.Center.Logo />
+        {import.meta.env.VITE_APP_PLUS_LP &&
+          <WelcomeScreen.Center.Logo />
+        }
         <WelcomeScreen.Center.Heading>
           {headingContent}
         </WelcomeScreen.Center.Heading>
@@ -55,7 +57,7 @@ export const AppWelcomeScreen: React.FC<{
               onSelect={() => props.setCollabDialogShown(true)}
             />
           )}
-          {!isExcalidrawPlusSignedUser && (
+          {!isExcalidrawPlusSignedUser && import.meta.env.VITE_APP_PLUS_LP && (
             <WelcomeScreen.Center.MenuItemLink
               href={`${
                 import.meta.env.VITE_APP_PLUS_LP
