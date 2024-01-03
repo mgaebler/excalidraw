@@ -1,6 +1,32 @@
 @import "../../packages/excalidraw/css/variables.module";
 
 .excalidraw {
+  .RoomDialog__qrContainer {
+    display: flex;
+    margin: 1.5em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include isMobile {
+      flex-direction: column;
+    }
+  }
+
+  .RoomDialog__qrDownloadContainer {
+    display: flex;
+    margin: 1.5em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include isMobile {
+      flex-direction: column;
+    }
+
+    button {
+      margin:5px;
+    }
+  }
+
   .RoomDialog {
     display: flex;
     flex-direction: column;

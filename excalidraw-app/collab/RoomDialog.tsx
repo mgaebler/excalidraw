@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import * as Popover from "@radix-ui/react-popover";
 
 import { copyTextToSystemClipboard } from "../../packages/excalidraw/clipboard";
@@ -20,8 +20,9 @@ import {
 import { TextField } from "../../packages/excalidraw/components/TextField";
 import { FilledButton } from "../../packages/excalidraw/components/FilledButton";
 
-import { ReactComponent as CollabImage } from "../../packages/excalidraw/assets/lock.svg";
+import { ReactComponent as CollabImage } from "../../packages/excalidraw/assets/lock-kits.svg";
 import "./RoomDialog.scss";
+import QRCodeStyling, { FileExtension } from "qr-code-styling";
 
 const getShareIcon = () => {
   const navigator = window.navigator as any;
@@ -47,6 +48,30 @@ export type RoomModalProps = {
   setErrorMessage: (message: string) => void;
 };
 
+const qrCode = new QRCodeStyling({
+  width: 200,
+  height: 200,
+  type: 'svg',
+  image: "",
+  dotsOptions: {
+    color: '#000000',
+    type: "dots",
+  },
+  cornersSquareOptions: {
+    type: 'square'
+  },
+  cornersDotOptions: {
+    type: 'dot'
+  },
+  backgroundOptions: {
+    color: "#fff",
+  },
+  imageOptions: {
+    crossOrigin: "anonymous",
+    margin: 20,
+  }
+});
+
 export const RoomModal = ({
   activeRoomLink,
   onRoomCreate,
@@ -61,6 +86,19 @@ export const RoomModal = ({
   const timerRef = useRef<number>(0);
   const ref = useRef<HTMLInputElement>(null);
   const isShareSupported = "share" in navigator;
+
+  const qrRef = useCallback((node: HTMLDivElement) => {
+    if (node !== null) {
+        qrCode.append(node);
+        qrCode.update({ data: ref?.current?.value });
+    }
+  }, []);
+
+  const onQRDownloadClick = (extension: FileExtension) => {
+    qrCode.download({
+      extension
+    });
+  };
 
   const copyRoomLink = async () => {
     try {
@@ -145,6 +183,13 @@ export const RoomModal = ({
               {tablerCheckIcon} copied
             </Popover.Content>
           </Popover.Root>
+        </div>
+        <div>
+          <div className="RoomDialog__qrContainer" ref={qrRef} />
+          <div className="RoomDialog__qrDownloadContainer">
+            <FilledButton variant="outlined" size="large" onClick={() => onQRDownloadClick('png')} label={t("roomDialog.button_downloadPNG")}/>
+            <FilledButton variant="outlined" size="large" onClick={() => onQRDownloadClick('svg')} label={t("roomDialog.button_downloadSVG")}/>
+          </div>
         </div>
         <div className="RoomDialog__active__description">
           <p>
