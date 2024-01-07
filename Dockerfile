@@ -15,7 +15,7 @@ COPY . .
 ARG NODE_ENV=production
 RUN yarn build:app:docker
 
-FROM nginx:1.21-alpine as production
+FROM nginxinc/nginx-unprivileged:1.25-alpine-slim as production
 
 COPY docker/default.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=production_buildstage /opt/node_app/excalidraw-app/build /usr/share/nginx/html
