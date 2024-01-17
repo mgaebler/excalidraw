@@ -289,7 +289,7 @@ export default function LibraryMenuItems({
         </>
 
         <>
-          {featureFlagLibraryButton && (
+          {(
             publishedItems.length > 0 ||
             pendingElements.length > 0 ||
             unpublishedItems.length > 0) && (
@@ -297,7 +297,7 @@ export default function LibraryMenuItems({
               {t("labels.excalidrawLib")}
             </div>
           )}
-          {featureFlagLibraryButton && publishedItems.length > 0 ? (
+          {publishedItems.length > 0 ? (
             <LibraryMenuSectionGrid>
               <LibraryMenuSection
                 itemsRenderedPerBatch={itemsRenderedPerBatch}
@@ -332,6 +332,7 @@ export default function LibraryMenuItems({
             id={id}
             libraryReturnUrl={libraryReturnUrl}
             theme={theme}
+            featureFlagLibraryButton={featureFlagLibraryButton}
           >
             <LibraryDropdownMenu
               selectedItems={selectedItems}

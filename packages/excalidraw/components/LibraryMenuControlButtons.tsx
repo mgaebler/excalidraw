@@ -9,6 +9,7 @@ export const LibraryMenuControlButtons = ({
   style,
   children,
   className,
+  featureFlagLibraryButton
 }: {
   libraryReturnUrl: ExcalidrawProps["libraryReturnUrl"];
   theme: UIAppState["theme"];
@@ -16,17 +17,20 @@ export const LibraryMenuControlButtons = ({
   style: React.CSSProperties;
   children?: React.ReactNode;
   className?: string;
+  featureFlagLibraryButton?: boolean;
 }) => {
   return (
     <div
       className={clsx("library-menu-control-buttons", className)}
       style={style}
     >
-      <LibraryMenuBrowseButton
-        id={id}
-        libraryReturnUrl={libraryReturnUrl}
-        theme={theme}
-      />
+      {featureFlagLibraryButton &&
+        <LibraryMenuBrowseButton
+          id={id}
+          libraryReturnUrl={libraryReturnUrl}
+          theme={theme}
+        />
+      }
       {children}
     </div>
   );
