@@ -21,24 +21,39 @@ services:
   excalidraw-storage-backend:
     stdin_open: true
     build: 
+      # for debugging purposes, it can be helpful to install and use the backend locally
+      # context: ../excalidraw-storage-backend
+      # target: development
       context: https://github.com/kitsteam/excalidraw-storage-backend.git#main
       target: production
     ports:
       - "8080:8080"
     environment:
-      STORAGE_URI: redis://:${REDIS_PASSWORD}@redis:6379
+      STORAGE_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       STORAGE_TTL: 2592000000
-
+    volumes:
+      - ../excalidraw-storage-backend:/home/node/app
   excalidraw-room:
     image: excalidraw/excalidraw-room
     ports:
       - "5001:80"
   
-  redis:
-    image: redis
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+  postgres:
+    image: postgres:15-alpine
+    # Pass config parameters to the postgres server.
+    # Find more information below when you need to generate the ssl-relevant file your self
+    # command: -c ssl=on -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: ${POSTGRES_DB:-excalidraw-dev}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_PORT:-5432}
+      POSTGRES_USER: ${POSTGRES_USER}
     volumes:
-      - redis_data:/data
+      - postgres_data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+
 volumes:
-  redis_data:
+  postgres_data:
   node_modules:
