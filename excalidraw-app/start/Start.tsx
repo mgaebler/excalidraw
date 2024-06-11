@@ -85,10 +85,9 @@ const Start: React.FC = () => {
 
               <div className="mt-10">
                 <small className="muted">
-                  Dieses Tool darf nur in Bildungskontexten genutzt werden. Die Eingabe personenbezogener Daten ist
-                  nicht gestattet.<br />
+                  Dieses Tool darf nur in Bildungskontexten genutzt werden. Die Eingabe personenbezogener Daten ist zu vermeiden.<br />
                   <br />
-                  Achtung: Erstellte Multi-User-Räume werden nach 30 Tagen gelöscht.
+                  Achtung: Erstellte Multi-User-Räume werden nach 13 Monaten gelöscht.
                 </small>
               </div>
 
