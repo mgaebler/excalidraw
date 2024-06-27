@@ -46,7 +46,7 @@ export const InfoDialog = ({ onClose }: { onClose?: () => void }) => {
                 </li>
                 <li>
                   <a
-                    href="https://kits.blog/datenschutzerklaerung/"
+                    href="https://kits.blog/datenschutz/#excalidraw"
                     rel="noreferrer"
                     target="_blank"
                   >

@@ -47,12 +47,12 @@ const Start: React.FC = () => {
                     >GitHub</a
                   >
                   <a className="padding-8 font-white" href="https://kits.blog/impressum/">Impressum</a>
-                  <a className="padding-8 font-white" href="https://kits.blog/datenschutzerklaerung/"
+                  <a className="padding-8 font-white" href="https://kits.blog/datenschutz/#excalidraw"
                     >Datenschutz</a
                   >
                 </div>
               </div>
-            
+
             </div>
           </div>
           <div
@@ -85,9 +85,9 @@ const Start: React.FC = () => {
 
               <div className="mt-10">
                 <small className="muted">
-                  Dieses Tool darf nur in Bildungskontexten genutzt werden. Die Eingabe personenbezogener Daten ist zu vermeiden.<br />
+                  Dieses Tool darf nur in Bildungskontexten genutzt werden. Die Eingabe sensibler Daten ist zu vermeiden.<br />
                   <br />
-                  Achtung: Erstellte Multi-User-Räume werden nach 13 Monaten gelöscht.
+                  Achtung: Erstellte Multi-User-Räume werden nach 24 Monaten gelöscht!
                 </small>
               </div>
 
@@ -114,7 +114,7 @@ const Start: React.FC = () => {
                 >GitHub</a
               >
               <a className="padding-8 font-white" href="https://kits.blog/impressum/">Impressum</a>
-              <a className="padding-8 font-white" href="https://kits.blog/datenschutzerklaerung/"
+              <a className="padding-8 font-white" href="https://kits.blog/datenschutz/#excalidraw"
                 >Datenschutz</a
               >
             </div>
