@@ -289,8 +289,7 @@ export default function LibraryMenuItems({
         </>
 
         <>
-          {(
-            publishedItems.length > 0 ||
+          {(publishedItems.length > 0 ||
             pendingElements.length > 0 ||
             unpublishedItems.length > 0) && (
             <div className="library-menu-items-container__header library-menu-items-container__header--excal">

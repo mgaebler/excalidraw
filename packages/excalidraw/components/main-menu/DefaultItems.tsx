@@ -19,7 +19,7 @@ import {
   TrashIcon,
   usersIcon,
 } from "../icons";
-import { GithubIcon, DiscordIcon, XBrandIcon } from "../icons";
+import { GithubIcon } from "../icons";
 import DropdownMenuItem from "../dropdownMenu/DropdownMenuItem";
 import DropdownMenuItemLink from "../dropdownMenu/DropdownMenuItemLink";
 import {
@@ -193,14 +193,14 @@ ClearCanvas.displayName = "ClearCanvas";
 export const ToggleTheme = (
   props:
     | {
-      allowSystemTheme: true;
-      theme: Theme | "system";
-      onSelect: (theme: Theme | "system") => void;
-    }
+        allowSystemTheme: true;
+        theme: Theme | "system";
+        onSelect: (theme: Theme | "system") => void;
+      }
     | {
-      allowSystemTheme?: false;
-      onSelect?: (theme: Theme) => void;
-    },
+        allowSystemTheme?: false;
+        onSelect?: (theme: Theme) => void;
+      },
 ) => {
   const { t } = useI18n();
   const appState = useUIAppState();

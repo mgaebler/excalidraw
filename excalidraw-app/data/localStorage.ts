@@ -6,7 +6,7 @@ import {
 } from "../../packages/excalidraw/appState";
 import { clearElementsForLocalStorage } from "../../packages/excalidraw/element";
 import { STORAGE_KEYS } from "../app_constants";
-import { ImportedDataState, KitsLastUsedState } from "../../packages/excalidraw/data/types";
+import type { KitsLastUsedState } from "../../packages/excalidraw/data/types";
 
 export const saveUsernameToLocalStorage = (username: string) => {
   try {
@@ -45,8 +45,8 @@ export const saveLastUsedRoomsToLocalStorage = (collabLink: string) => {
 export const loadLastUsedRoomsToLocalStorage = (): KitsLastUsedState[] => {
   return JSON.parse(
     localStorage.getItem(STORAGE_KEYS.LOCAL_KITS_LAST_USED) || "[]",
-  )
-}
+  );
+};
 
 export const importUsernameFromLocalStorage = (): string | null => {
   try {

@@ -22,7 +22,8 @@ import { FilledButton } from "../../packages/excalidraw/components/FilledButton"
 
 import { ReactComponent as CollabImage } from "../../packages/excalidraw/assets/lock-kits.svg";
 import "./RoomDialog.scss";
-import QRCodeStyling, { FileExtension } from "qr-code-styling";
+import type { FileExtension } from "qr-code-styling";
+import QRCodeStyling from "qr-code-styling";
 
 const getShareIcon = () => {
   const navigator = window.navigator as any;
@@ -51,17 +52,17 @@ export type RoomModalProps = {
 const qrCode = new QRCodeStyling({
   width: 200,
   height: 200,
-  type: 'svg',
+  type: "svg",
   image: "",
   dotsOptions: {
-    color: '#000000',
+    color: "#000000",
     type: "dots",
   },
   cornersSquareOptions: {
-    type: 'square'
+    type: "square",
   },
   cornersDotOptions: {
-    type: 'dot'
+    type: "dot",
   },
   backgroundOptions: {
     color: "#fff",
@@ -69,7 +70,7 @@ const qrCode = new QRCodeStyling({
   imageOptions: {
     crossOrigin: "anonymous",
     margin: 20,
-  }
+  },
 });
 
 export const RoomModal = ({
@@ -89,14 +90,14 @@ export const RoomModal = ({
 
   const qrRef = useCallback((node: HTMLDivElement) => {
     if (node !== null) {
-        qrCode.append(node);
-        qrCode.update({ data: ref?.current?.value });
+      qrCode.append(node);
+      qrCode.update({ data: ref?.current?.value });
     }
-  }, []);
+  }, [qrCode, ref]);
 
   const onQRDownloadClick = (extension: FileExtension) => {
     qrCode.download({
-      extension
+      extension,
     });
   };
 
@@ -183,11 +184,21 @@ export const RoomModal = ({
             </Popover.Content>
           </Popover.Root>
         </div>
-        <div>
+        <div className="RoomDialog__active__qrCode">
           <div className="RoomDialog__qrContainer" ref={qrRef} />
           <div className="RoomDialog__qrDownloadContainer">
-            <FilledButton variant="outlined" size="large" onClick={() => onQRDownloadClick('png')} label={t("roomDialog.button_downloadPNG")}/>
-            <FilledButton variant="outlined" size="large" onClick={() => onQRDownloadClick('svg')} label={t("roomDialog.button_downloadSVG")}/>
+            <FilledButton
+              variant="outlined"
+              size="large"
+              onClick={() => onQRDownloadClick("png")}
+              label={t("roomDialog.button_downloadPNG")}
+            />
+            <FilledButton
+              variant="outlined"
+              size="large"
+              onClick={() => onQRDownloadClick("svg")}
+              label={t("roomDialog.button_downloadSVG")}
+            />
           </div>
         </div>
         <div className="RoomDialog__active__description">

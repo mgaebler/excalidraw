@@ -29,25 +29,36 @@ import { reconcileElements } from "../../packages/excalidraw/data/reconcile";
 import type { StoredScene } from "./StorageBackend";
 import type { Socket } from "socket.io-client";
 
-const apiPath = '/api/v2'
-const scenePath = '/scenes/'
-export const sceneApiPath = apiPath + scenePath
+const apiPath = "/api/v2";
+const scenePath = "/scenes/";
+export const sceneApiPath = apiPath + scenePath;
 
-export const createServerUrl = (targetSubdomain: string, postFix?: string): string => {
-  const hostArray = window.location.host.split('.')
-  const protocol = window.location.protocol + '//'
-  if (hostArray.length === 1) console.warn("localhost does not work for URL_PART_NAME variables");
+export const createServerUrl = (
+  targetSubdomain: string,
+  postFix?: string,
+): string => {
+  const hostArray = window.location.host.split(".");
+  const protocol = `${window.location.protocol}//`;
+  if (hostArray.length === 1) {
+    console.warn("localhost does not work for URL_PART_NAME variables");
+  }
 
   // Kits domains for excali start with draw
-  const subdomain = hostArray[0].replace('draw', targetSubdomain)
+  const subdomain = hostArray[0].replace("draw", targetSubdomain);
 
-  return `${protocol}${subdomain}.${hostArray.slice(1, hostArray.length).join('.')}${postFix ? postFix : ''}`
-}
+  return `${protocol}${subdomain}.${hostArray
+    .slice(1, hostArray.length)
+    .join(".")}${postFix ? postFix : ""}`;
+};
 
-const httpStorageBackendUrl = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME ?
-  createServerUrl(import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME, apiPath) :
-  `${import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL}${apiPath}`
-const SCENE_VERSION_LENGTH_BYTES = 4
+const httpStorageBackendUrl = import.meta.env
+  .VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME
+  ? createServerUrl(
+      import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME,
+      apiPath,
+    )
+  : `${import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL}${apiPath}`;
+const SCENE_VERSION_LENGTH_BYTES = 4;
 
 // There is a lot of intentional duplication with the firebase file
 // to prevent modifying upstream files and ease futur maintenance of this fork
@@ -86,9 +97,7 @@ export const saveToHttpStorage = async (
   }
 
   const sceneVersion = getSceneVersion(elements);
-  const getResponse = await fetch(
-    `${httpStorageBackendUrl}/rooms/${roomId}`,
-  );
+  const getResponse = await fetch(`${httpStorageBackendUrl}/rooms/${roomId}`);
 
   if (!getResponse.ok && getResponse.status !== 404) {
     return false;
@@ -143,9 +152,7 @@ export const loadFromHttpStorage = async (
   roomKey: string,
   socket: Socket | null,
 ): Promise<readonly ExcalidrawElement[] | null> => {
-  const getResponse = await fetch(
-    `${httpStorageBackendUrl}/rooms/${roomId}`,
-  );
+  const getResponse = await fetch(`${httpStorageBackendUrl}/rooms/${roomId}`);
 
   const buffer = await getResponse.arrayBuffer();
   const elements = await getElementsFromBuffer(buffer, roomKey);
@@ -270,13 +277,10 @@ const saveElementsToBackend = async (
   const payloadBlob = await new Response(
     new Blob([sceneVersionBuffer, iv.buffer, ciphertext]),
   ).arrayBuffer();
-  const putResponse = await fetch(
-    `${httpStorageBackendUrl}/rooms/${roomId}`,
-    {
-      method: "PUT",
-      body: payloadBlob,
-    },
-  );
+  const putResponse = await fetch(`${httpStorageBackendUrl}/rooms/${roomId}`, {
+    method: "PUT",
+    body: payloadBlob,
+  });
 
   return putResponse.ok;
 };

@@ -60,12 +60,20 @@ export const getSyncableElements = (
     isSyncableElement(element),
   ) as SyncableExcalidrawElement[];
 
-const BACKEND_V2_GET = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME ?
-  createServerUrl(import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME, sceneApiPath) :
-  import.meta.env.VITE_APP_BACKEND_V2_GET_URL + sceneApiPath
-const BACKEND_V2_POST = import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME ?
-  createServerUrl(import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME, sceneApiPath) :
-  import.meta.env.VITE_APP_BACKEND_V2_POST_URL + sceneApiPath
+const BACKEND_V2_GET = import.meta.env
+  .VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME
+  ? createServerUrl(
+      import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME,
+      sceneApiPath,
+    )
+  : import.meta.env.VITE_APP_BACKEND_V2_GET_URL + sceneApiPath;
+const BACKEND_V2_POST = import.meta.env
+  .VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME
+  ? createServerUrl(
+      import.meta.env.VITE_APP_HTTP_STORAGE_BACKEND_URL_PART_NAME,
+      sceneApiPath,
+    )
+  : import.meta.env.VITE_APP_BACKEND_V2_POST_URL + sceneApiPath;
 
 const generateRoomId = async () => {
   const buffer = new Uint8Array(ROOM_ID_BYTES);

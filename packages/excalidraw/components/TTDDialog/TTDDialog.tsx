@@ -48,18 +48,18 @@ type OnTestSubmitRetValue = {
   rateLimit?: number | null;
   rateLimitRemaining?: number | null;
 } & (
-    | { generatedResponse: string | undefined; error?: null | undefined }
-    | {
+  | { generatedResponse: string | undefined; error?: null | undefined }
+  | {
       error: Error;
       generatedResponse?: null | undefined;
     }
-  );
+);
 
 export const TTDDialog = (
   props:
     | {
-      onTextSubmit(value: string): Promise<OnTestSubmitRetValue>;
-    }
+        onTextSubmit(value: string): Promise<OnTestSubmitRetValue>;
+      }
     | { __fallback: true },
 ) => {
   const appState = useUIAppState();
@@ -82,11 +82,11 @@ export const TTDDialogBase = withInternalFallback(
   }: {
     tab: "text-to-diagram" | "mermaid";
   } & (
-      | {
+    | {
         onTextSubmit(value: string): Promise<OnTestSubmitRetValue>;
       }
-      | { __fallback: true }
-    )) => {
+    | { __fallback: true }
+  )) => {
     const app = useApp();
     const setAppState = useExcalidrawSetAppState();
 
@@ -242,7 +242,7 @@ export const TTDDialogBase = withInternalFallback(
             <p className="dialog-mermaid-title">{t("mermaid.title")}</p>
           ) : (
             <TTDDialogTabTriggers>
-              {app.props.aiEnabled !== false &&
+              {app.props.aiEnabled !== false && (
                 <TTDDialogTabTrigger tab="text-to-diagram">
                   <div style={{ display: "flex", alignItems: "center" }}>
                     {t("labels.textToDiagram")}
@@ -263,7 +263,7 @@ export const TTDDialogBase = withInternalFallback(
                     </div>
                   </div>
                 </TTDDialogTabTrigger>
-              }
+              )}
               <TTDDialogTabTrigger tab="mermaid">Mermaid</TTDDialogTabTrigger>
             </TTDDialogTabTriggers>
           )}

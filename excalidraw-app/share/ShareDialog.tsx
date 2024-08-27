@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { copyTextToSystemClipboard } from "../../packages/excalidraw/clipboard";
 import { trackEvent } from "../../packages/excalidraw/analytics";
@@ -24,6 +24,8 @@ import { atom, useAtom, useAtomValue } from "jotai";
 
 import "./ShareDialog.scss";
 import { useUIAppState } from "../../packages/excalidraw/context/ui-appState";
+import type { FileExtension } from "qr-code-styling";
+import QRCodeStyling from "qr-code-styling";
 
 type OnExportToBackend = () => void;
 type ShareDialogType = "share" | "collaborationOnly";
@@ -53,6 +55,30 @@ export type ShareDialogProps = {
   type: ShareDialogType;
 };
 
+const qrCode = new QRCodeStyling({
+  width: 200,
+  height: 200,
+  type: "svg",
+  image: "",
+  dotsOptions: {
+    color: "#000000",
+    type: "dots",
+  },
+  cornersSquareOptions: {
+    type: "square",
+  },
+  cornersDotOptions: {
+    type: "dot",
+  },
+  backgroundOptions: {
+    color: "#fff",
+  },
+  imageOptions: {
+    crossOrigin: "anonymous",
+    margin: 20,
+  },
+});
+
 const ActiveRoomDialog = ({
   collabAPI,
   activeRoomLink,
@@ -67,6 +93,19 @@ const ActiveRoomDialog = ({
   const timerRef = useRef<number>(0);
   const ref = useRef<HTMLInputElement>(null);
   const isShareSupported = "share" in navigator;
+
+  const qrRef = useCallback((node: HTMLDivElement) => {
+    if (node !== null) {
+      qrCode.append(node);
+      qrCode.update({ data: ref?.current?.value });
+    }
+  }, [qrCode, ref]);
+
+  const onQRDownloadClick = (extension: FileExtension) => {
+    qrCode.download({
+      extension,
+    });
+  };
 
   const copyRoomLink = async () => {
     try {
@@ -150,6 +189,23 @@ const ActiveRoomDialog = ({
             {tablerCheckIcon} copied
           </Popover.Content>
         </Popover.Root>
+      </div>
+      <div className="ShareDialog__active__qrCode">
+        <div className="ShareDialog__qrContainer" ref={qrRef} />
+        <div className="ShareDialog__qrDownloadContainer">
+          <FilledButton
+            variant="outlined"
+            size="large"
+            onClick={() => onQRDownloadClick("png")}
+            label={t("roomDialog.button_downloadPNG")}
+          />
+          <FilledButton
+            variant="outlined"
+            size="large"
+            onClick={() => onQRDownloadClick("svg")}
+            label={t("roomDialog.button_downloadSVG")}
+          />
+        </div>
       </div>
       <div className="ShareDialog__active__description">
         <p>

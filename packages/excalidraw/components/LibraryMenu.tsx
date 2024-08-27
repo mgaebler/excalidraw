@@ -117,11 +117,8 @@ export const LibraryMenuContent = ({
     );
   }
 
-  const appState = useUIAppState();
-
   const showBtn =
-    appState.featureFlagLibraryButton &&
-    (libraryItemsData.libraryItems.length > 0 || pendingElements.length > 0);
+    libraryItemsData.libraryItems.length > 0 || pendingElements.length > 0; // @TODO: Do we need appState.featureFlagLibraryButton here?
 
   return (
     <LibraryMenuWrapper>
@@ -136,7 +133,7 @@ export const LibraryMenuContent = ({
         theme={theme}
         onSelectItems={onSelectItems}
         selectedItems={selectedItems}
-        featureFlagLibraryButton={appState.featureFlagLibraryButton}
+        featureFlagLibraryButton={true}
       />
       {showBtn && (
         <LibraryMenuControlButtons

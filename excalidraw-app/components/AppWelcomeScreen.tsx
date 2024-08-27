@@ -43,9 +43,7 @@ export const AppWelcomeScreen: React.FC<{
       <WelcomeScreen.Hints.ToolbarHint />
       <WelcomeScreen.Hints.HelpHint />
       <WelcomeScreen.Center>
-        {import.meta.env.VITE_APP_PLUS_LP &&
-          <WelcomeScreen.Center.Logo />
-        }
+        {import.meta.env.VITE_APP_PLUS_LP && <WelcomeScreen.Center.Logo />}
         <WelcomeScreen.Center.Heading>
           {headingContent}
         </WelcomeScreen.Center.Heading>

@@ -303,17 +303,17 @@ const generateElementCanvas = (
     // Clear the bound text area
     boundTextCanvasContext.clearRect(
       -(boundTextElement.width / 2 + BOUND_TEXT_PADDING) *
-      window.devicePixelRatio *
-      scale,
+        window.devicePixelRatio *
+        scale,
       -(boundTextElement.height / 2 + BOUND_TEXT_PADDING) *
-      window.devicePixelRatio *
-      scale,
+        window.devicePixelRatio *
+        scale,
       (boundTextElement.width + BOUND_TEXT_PADDING * 2) *
-      window.devicePixelRatio *
-      scale,
+        window.devicePixelRatio *
+        scale,
       (boundTextElement.height + BOUND_TEXT_PADDING * 2) *
-      window.devicePixelRatio *
-      scale,
+        window.devicePixelRatio *
+        scale,
     );
   }
 
@@ -467,8 +467,8 @@ const drawElementOnCanvas = (
           element.textAlign === "center"
             ? element.width / 2
             : element.textAlign === "right"
-              ? element.width
-              : 0;
+            ? element.width
+            : 0;
 
         const lineHeightPx = getLineHeightInPx(
           element.fontSize,
@@ -614,16 +614,16 @@ const drawElementFromCanvas = (
     context.drawImage(
       elementWithCanvas.canvas!,
       (x1 + appState.scrollX) * window.devicePixelRatio -
-      (padding * elementWithCanvas.scale) / elementWithCanvas.scale,
+        (padding * elementWithCanvas.scale) / elementWithCanvas.scale,
       (y1 + appState.scrollY) * window.devicePixelRatio -
-      (padding * elementWithCanvas.scale) / elementWithCanvas.scale,
+        (padding * elementWithCanvas.scale) / elementWithCanvas.scale,
       elementWithCanvas.canvas!.width / elementWithCanvas.scale,
       elementWithCanvas.canvas!.height / elementWithCanvas.scale,
     );
 
     if (
       import.meta.env.VITE_APP_DEBUG_ENABLE_TEXT_CONTAINER_BOUNDING_BOX ===
-      "true" &&
+        "true" &&
       hasBoundTextElement(element)
     ) {
       const textElement = getBoundTextElement(
@@ -703,7 +703,9 @@ export const renderElement = (
         // TODO change later to only affect AI frames
         if (isMagicFrameElement(element)) {
           context.strokeStyle =
-            appState.theme === THEME.LIGHT ? "rgb(0, 163, 211)" : "rgb(0, 163, 211)";
+            appState.theme === THEME.LIGHT
+              ? "rgb(0, 163, 211)"
+              : "rgb(0, 163, 211)";
         }
 
         if (FRAME_STYLE.radius && context.roundRect) {
@@ -959,8 +961,8 @@ export function getFreeDrawSvgPath(element: ExcalidrawFreeDrawElement) {
   const inputPoints = element.simulatePressure
     ? element.points
     : element.points.length
-      ? element.points.map(([x, y], i) => [x, y, element.pressures[i]])
-      : [[0, 0, 0.5]];
+    ? element.points.map(([x, y], i) => [x, y, element.pressures[i]])
+    : [[0, 0, 0.5]];
 
   // Consider changing the options for simulated pressure vs real pressure
   const options: StrokeOptions = {
