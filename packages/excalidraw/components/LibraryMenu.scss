@@ -10,8 +10,8 @@
 
   .library-actions-counter {
     background-color: var(--color-primary);
-    color: var(--white);
-    font-weight: bold;
+    color: var(--color-primary-light);
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,9 +48,11 @@
     &-close.ToolIcon_type_button {
       background-color: $oc-blue-6;
       align-self: flex-end;
+
       &:hover {
         background-color: $oc-blue-8;
       }
+
       .ToolIcon__icon {
         width: auto;
         font-size: 1rem;
@@ -101,6 +103,7 @@
     &:hover {
       background-color: var(--color-brand-hover);
     }
+
     &:active {
       background-color: var(--color-brand-active);
     }

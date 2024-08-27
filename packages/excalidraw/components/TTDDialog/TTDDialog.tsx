@@ -2,7 +2,8 @@ import { Dialog } from "../Dialog";
 import { useApp, useExcalidrawSetAppState } from "../App";
 import MermaidToExcalidraw from "./MermaidToExcalidraw";
 import TTDDialogTabs from "./TTDDialogTabs";
-import { ChangeEventHandler, useEffect, useRef, useState } from "react";
+import type { ChangeEventHandler } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUIAppState } from "../../context/ui-appState";
 import { withInternalFallback } from "../hoc/withInternalFallback";
 import { TTDDialogTabTriggers } from "./TTDDialogTabTriggers";
@@ -13,14 +14,14 @@ import { TTDDialogInput } from "./TTDDialogInput";
 import { TTDDialogOutput } from "./TTDDialogOutput";
 import { TTDDialogPanel } from "./TTDDialogPanel";
 import { TTDDialogPanels } from "./TTDDialogPanels";
+import type { MermaidToExcalidrawLibProps } from "./common";
 import {
-  MermaidToExcalidrawLibProps,
   convertMermaidToExcalidraw,
   insertToEditor,
   saveMermaidDataToStorage,
 } from "./common";
-import { NonDeletedExcalidrawElement } from "../../element/types";
-import { BinaryFiles } from "../../types";
+import type { NonDeletedExcalidrawElement } from "../../element/types";
+import type { BinaryFiles } from "../../types";
 import { ArrowRightIcon } from "../icons";
 
 import "./TTDDialog.scss";
@@ -47,18 +48,18 @@ type OnTestSubmitRetValue = {
   rateLimit?: number | null;
   rateLimitRemaining?: number | null;
 } & (
-  | { generatedResponse: string | undefined; error?: null | undefined }
-  | {
+    | { generatedResponse: string | undefined; error?: null | undefined }
+    | {
       error: Error;
       generatedResponse?: null | undefined;
     }
-);
+  );
 
 export const TTDDialog = (
   props:
     | {
-        onTextSubmit(value: string): Promise<OnTestSubmitRetValue>;
-      }
+      onTextSubmit(value: string): Promise<OnTestSubmitRetValue>;
+    }
     | { __fallback: true },
 ) => {
   const appState = useUIAppState();
@@ -81,11 +82,11 @@ export const TTDDialogBase = withInternalFallback(
   }: {
     tab: "text-to-diagram" | "mermaid";
   } & (
-    | {
+      | {
         onTextSubmit(value: string): Promise<OnTestSubmitRetValue>;
       }
-    | { __fallback: true }
-  )) => {
+      | { __fallback: true }
+    )) => {
     const app = useApp();
     const setAppState = useExcalidrawSetAppState();
 
@@ -207,9 +208,7 @@ export const TTDDialogBase = withInternalFallback(
     const [mermaidToExcalidrawLib, setMermaidToExcalidrawLib] =
       useState<MermaidToExcalidrawLibProps>({
         loaded: false,
-        api: import(
-          /* webpackChunkName:"mermaid-to-excalidraw" */ "@excalidraw/mermaid-to-excalidraw"
-        ),
+        api: import("@excalidraw/mermaid-to-excalidraw"),
       });
 
     useEffect(() => {
@@ -243,7 +242,7 @@ export const TTDDialogBase = withInternalFallback(
             <p className="dialog-mermaid-title">{t("mermaid.title")}</p>
           ) : (
             <TTDDialogTabTriggers>
-              { app.props.aiEnabled !== false &&
+              {app.props.aiEnabled !== false &&
                 <TTDDialogTabTrigger tab="text-to-diagram">
                   <div style={{ display: "flex", alignItems: "center" }}>
                     {t("labels.textToDiagram")}
