@@ -94,12 +94,15 @@ const ActiveRoomDialog = ({
   const ref = useRef<HTMLInputElement>(null);
   const isShareSupported = "share" in navigator;
 
-  const qrRef = useCallback((node: HTMLDivElement) => {
-    if (node !== null) {
-      qrCode.append(node);
-      qrCode.update({ data: ref?.current?.value });
-    }
-  }, [qrCode, ref]);
+  const qrRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (node !== null) {
+        qrCode.append(node);
+        qrCode.update({ data: ref?.current?.value });
+      }
+    },
+    [ref],
+  );
 
   const onQRDownloadClick = (extension: FileExtension) => {
     qrCode.download({
