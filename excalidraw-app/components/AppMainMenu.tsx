@@ -29,15 +29,17 @@ export const AppMainMenu: React.FC<{
       <MainMenu.DefaultItems.ClearCanvas />
       <MainMenu.Separator />
       <MainMenu.DefaultItems.Socials />
-      <MainMenu.ItemLink
-        icon={loginIcon}
-        href={`${import.meta.env.VITE_APP_PLUS_APP}${
-          isExcalidrawPlusSignedUser ? "" : "/sign-up"
-        }?utm_source=signin&utm_medium=app&utm_content=hamburger`}
-        className="highlighted"
-      >
-        {isExcalidrawPlusSignedUser ? "Sign in" : "Sign up"}
-      </MainMenu.ItemLink>
+      {import.meta.env.VITE_APP_PLUS_LP && (
+        <MainMenu.ItemLink
+          icon={loginIcon}
+          href={`${import.meta.env.VITE_APP_PLUS_APP}${
+            isExcalidrawPlusSignedUser ? "" : "/sign-up"
+          }?utm_source=signin&utm_medium=app&utm_content=hamburger`}
+          className="highlighted"
+        >
+          {isExcalidrawPlusSignedUser ? "Sign in" : "Sign up"}
+        </MainMenu.ItemLink>
+      )}
       <MainMenu.Separator />
       <MainMenu.DefaultItems.ToggleTheme
         allowSystemTheme

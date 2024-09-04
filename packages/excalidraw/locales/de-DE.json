@@ -21,6 +21,7 @@
     "copyStyles": "Formatierung kopieren",
     "pasteStyles": "Formatierung übernehmen",
     "stroke": "Strich",
+    "changeStroke": "Strichfarbe ändern",
     "background": "Hintergrund",
     "fill": "Füllung",
     "strokeWidth": "Strichstärke",
@@ -72,6 +73,7 @@
     "canvasColors": "Auf Leinwand verwendet",
     "canvasBackground": "Zeichenflächenhintergrund",
     "drawingCanvas": "Leinwand",
+    "clearCanvas": "Leinwand löschen",
     "layers": "Ebenen",
     "actions": "Aktionen",
     "language": "Sprache",
@@ -84,6 +86,7 @@
     "group": "Auswahl gruppieren",
     "ungroup": "Gruppierung aufheben",
     "collaborators": "Mitarbeitende",
+    "toggleGrid": "Raster anzeigen/ausblenden",
     "showGrid": "Raster anzeigen",
     "addToLibrary": "Zur Bibliothek hinzufügen",
     "removeFromLibrary": "Aus Bibliothek entfernen",
@@ -299,6 +302,9 @@
     "openIssueMessage": "Wir waren sehr vorsichtig und haben deine Zeichnungsinformationen nicht in die Fehlerinformationen aufgenommen. Wenn deine Zeichnung nicht privat ist, unterstütze uns bitte über unseren <button>Bug-Tracker</button>. Bitte teile die unten stehenden Informationen mit uns im GitHub Issue (Kopieren und Einfügen).",
     "sceneContent": "Zeichnungsinhalt:"
   },
+  "shareDialog": {
+    "or": "oder"
+  },
   "roomDialog": {
     "desc_intro": "Du kannst Leute zu deiner aktuellen Zeichnung einladen um mit ihnen zusammenzuarbeiten.",
     "desc_privacy": "Keine Sorge, die Sitzung nutzt eine Ende-zu-Ende-Verschlüsselung. Alles was du zeichnest, bleibt privat. Auch unser Server sieht nicht, was du dir einfallen lässt.",
@@ -429,7 +435,10 @@
     "scene": "Zeichnung",
     "selected": "Ausgewählt",
     "storage": "Speicher",
+    "fullTitle": "Eigenschaften von Leinwand und Form",
     "title": "Statistiken für Nerds",
+    "generalStats": "Allgemein",
+    "elementProperties": "Form-Eigenschaften",
     "total": "Gesamt",
     "version": "Version",
     "versionCopy": "Zum Kopieren klicken",
@@ -523,5 +532,41 @@
     "description": "Derzeit werden nur <flowchartLink>Flussdiagramme</flowchartLink>, <sequenceLink>Sequenzdiagramme</sequenceLink> und <classLink>Klassendiagramme</classLink> unterstützt. Die anderen Typen werden als Bild in Excalidraw dargestellt.",
     "syntax": "Mermaid-Syntax",
     "preview": "Vorschau"
+  },
+  "quickSearch": {
+    "placeholder": "Quick search"
+  },
+  "fontList": {
+    "badge": {
+      "old": "alt"
+    },
+    "sceneFonts": "In dieser Szene",
+    "availableFonts": "Verfügbare Schriftarten",
+    "empty": "Keine Schriftarten gefunden"
+  },
+  "userList": {
+    "empty": "Keine Nutzer gefunden",
+    "hint": {
+      "text": "Benutzer anklicken, um zu folgen",
+      "followStatus": "Du folgst gerade diesem Benutzer",
+      "inCall": "Benutzer befindet sich in einem Sprachanruf",
+      "micMuted": "Das Mikrofon des Benutzers ist stummgeschaltet",
+      "isSpeaking": "Benutzer spricht gerade"
+    }
+  },
+  "commandPalette": {
+    "title": "Befehlspalette",
+    "shortcuts": {
+      "select": "Auswählen",
+      "confirm": "Bestätigen",
+      "close": "Schließen"
+    },
+    "recents": "Kürzloich verwendet",
+    "search": {
+      "placeholder": "Menüs und Befehle durchsuchen und versteckte Schätze entdecken",
+      "noMatch": "Keine passenden Befehle..."
+    },
+    "itemNotAvailable": "Befehl ist nicht verfügbar...",
+    "shortcutHint": "Für die Befehlspalette verwenden Sie {{shortcut}}"
   }
 }

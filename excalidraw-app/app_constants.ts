@@ -52,7 +52,6 @@ export const STORAGE_KEYS = {
 export const COOKIES = {
   AUTH_STATE_COOKIE: "excplus-auth",
 } as const;
-
 export const isExcalidrawPlusSignedUser = document.cookie.includes(
   COOKIES.AUTH_STATE_COOKIE,
 );
