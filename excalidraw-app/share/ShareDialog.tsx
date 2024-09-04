@@ -176,7 +176,7 @@ const ActiveRoomDialog = ({
           <Popover.Trigger asChild>
             <FilledButton
               size="large"
-              label="Copy link"
+              label="Link kopieren"
               icon={copyIcon}
               onClick={copyRoomLink}
             />

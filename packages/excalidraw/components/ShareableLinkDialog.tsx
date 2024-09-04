@@ -50,7 +50,7 @@ export const ShareableLinkDialog = ({
   return (
     <Dialog onCloseRequest={onCloseRequest} title={false} size="small">
       <div className="ShareableLinkDialog">
-        <h3>Shareable link</h3>
+        <h3>Teilbarer Link</h3>
         <div className="ShareableLinkDialog__linkRow">
           <TextField
             ref={ref}
@@ -64,7 +64,7 @@ export const ShareableLinkDialog = ({
             <Popover.Trigger asChild>
               <FilledButton
                 size="large"
-                label="Copy link"
+                label="Link kopieren"
                 icon={copyIcon}
                 onClick={copyRoomLink}
               />

@@ -164,7 +164,7 @@ if (window.self !== window.top) {
 }
 
 const shareableLinkConfirmDialog = {
-  title: t("overwriteConfirm.modal.shareableLink.title"),
+  title: "Aus Link laden",
   description: (
     <Trans
       i18nKey="overwriteConfirm.modal.shareableLink.description"
@@ -172,7 +172,7 @@ const shareableLinkConfirmDialog = {
       br={() => <br />}
     />
   ),
-  actionLabel: t("overwriteConfirm.modal.shareableLink.button"),
+  actionLabel: "Meinen Inhalt ersetzen",
   color: "danger",
 } as const;
 
@@ -298,11 +298,11 @@ const initializeScene = async (opts: {
   } else if (scene) {
     return isExternalScene && jsonBackendMatch
       ? {
-        scene,
-        isExternalScene,
-        id: jsonBackendMatch[1],
-        key: jsonBackendMatch[2],
-      }
+          scene,
+          isExternalScene,
+          id: jsonBackendMatch[1],
+          key: jsonBackendMatch[2],
+        }
       : { scene, isExternalScene: false };
   }
   return { scene: null, isExternalScene: false };
@@ -784,7 +784,8 @@ const ExcalidrawWrapper = () => {
           onTextSubmit={async (input) => {
             try {
               const response = await fetch(
-                `${import.meta.env.VITE_APP_AI_BACKEND
+                `${
+                  import.meta.env.VITE_APP_AI_BACKEND
                 }/v1/ai/text-to-diagram/generate`,
                 {
                   method: "POST",
@@ -804,9 +805,9 @@ const ExcalidrawWrapper = () => {
                 "X-Ratelimit-Remaining",
               )
                 ? parseInt(
-                  response.headers.get("X-Ratelimit-Remaining") || "0",
-                  10,
-                )
+                    response.headers.get("X-Ratelimit-Remaining") || "0",
+                    10,
+                  )
                 : undefined;
 
               const json = await response.json();

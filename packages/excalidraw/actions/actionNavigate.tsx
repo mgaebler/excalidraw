@@ -14,7 +14,7 @@ import clsx from "clsx";
 
 export const actionGoToCollaborator = register({
   name: "goToCollaborator",
-  label: "Go to a collaborator",
+  label: "Zu einem Mitwirkenden gehen",
   viewMode: true,
   trackEvent: { category: "collab" },
   perform: (_elements, appState, collaborator: Collaborator) => {
