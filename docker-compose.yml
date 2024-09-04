@@ -19,25 +19,23 @@ services:
       - ./:/opt/node_app/
 
   excalidraw-storage-backend:
-    stdin_open: true
-    build: 
-      # for debugging purposes, it can be helpful to install and use the backend locally
-      # context: ../excalidraw-storage-backend
-      # target: development
+    build:
       context: https://github.com/kitsteam/excalidraw-storage-backend.git#main
       target: production
+    stdin_open: true
+    container_name: excalidraw-storage-backend
     ports:
       - "8080:8080"
     environment:
-      STORAGE_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      STORAGE_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT:-5432}/${POSTGRES_DB:-excalidraw-dev}
       STORAGE_TTL: 2592000000
-    volumes:
-      - ../excalidraw-storage-backend:/home/node/app
+
   excalidraw-room:
     image: excalidraw/excalidraw-room
+    container_name: excalidraw-room
     ports:
       - "5001:80"
-  
+
   postgres:
     image: postgres:15-alpine
     # Pass config parameters to the postgres server.
@@ -51,9 +49,9 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
     volumes:
       - postgres_data:/var/lib/postgresql/data/pgdata
+    container_name: excalidraw-postgres
     ports:
       - "5432:5432"
-
 volumes:
   postgres_data:
   node_modules:

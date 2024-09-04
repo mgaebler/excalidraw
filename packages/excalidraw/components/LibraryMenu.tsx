@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useMemo, useRef } from "react";
-import Library, {
+import type Library from "../data/library";
+import {
   distributeLibraryItemsOnSquareGrid,
   libraryItemsAtom,
 } from "../data/library";
 import { t } from "../i18n";
 import { randomId } from "../random";
-import {
+import type {
   LibraryItems,
   LibraryItem,
   ExcalidrawProps,
@@ -28,7 +29,7 @@ import { useUIAppState } from "../context/ui-appState";
 import "./LibraryMenu.scss";
 import { LibraryMenuControlButtons } from "./LibraryMenuControlButtons";
 import { isShallowEqual } from "../utils";
-import { NonDeletedExcalidrawElement } from "../element/types";
+import type { NonDeletedExcalidrawElement } from "../element/types";
 import { LIBRARY_DISABLED_TYPES } from "../constants";
 
 export const isLibraryMenuOpenAtom = atom(false);
@@ -116,11 +117,8 @@ export const LibraryMenuContent = ({
     );
   }
 
-  const appState = useUIAppState();
-
   const showBtn =
-    appState.featureFlagLibraryButton &&
-    (libraryItemsData.libraryItems.length > 0 || pendingElements.length > 0);
+    libraryItemsData.libraryItems.length > 0 || pendingElements.length > 0; // @TODO: Do we need appState.featureFlagLibraryButton here?
 
   return (
     <LibraryMenuWrapper>
@@ -135,7 +133,7 @@ export const LibraryMenuContent = ({
         theme={theme}
         onSelectItems={onSelectItems}
         selectedItems={selectedItems}
-        featureFlagLibraryButton={appState.featureFlagLibraryButton}
+        featureFlagLibraryButton={true}
       />
       {showBtn && (
         <LibraryMenuControlButtons
