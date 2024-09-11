@@ -118,7 +118,7 @@ export class ExcalidrawFont implements Font {
     }
 
     // fallback url for bundled fonts
-    urls.push(new URL(assetUrl, UNPKG_PROD_URL));
+    //urls.push(new URL(assetUrl, UNPKG_PROD_URL));
 
     return urls;
   }

@@ -83,6 +83,7 @@ import type {
   ReconciledExcalidrawElement,
   RemoteExcalidrawElement,
 } from "../../packages/excalidraw/data/reconcile";
+import { createServerUrl } from "../data/httpStorage";
 
 export const collabAPIAtom = atom<CollabAPI | null>(null);
 export const isCollaboratingAtom = atom(false);
@@ -483,9 +484,17 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     };
     this.fallbackInitializationHandler = fallbackInitializationHandler;
 
+    let socketUrl = import.meta.env.VITE_APP_WS_SERVER_URL;
+
+    if (import.meta.env.VITE_APP_HTTP_STORAGE_WS_URL_PART_NAME) {
+      socketUrl = createServerUrl(
+        import.meta.env.VITE_APP_HTTP_STORAGE_WS_URL_PART_NAME,
+      );
+    }
+
     try {
       this.portal.socket = this.portal.open(
-        socketIOClient(import.meta.env.VITE_APP_WS_SERVER_URL, {
+        socketIOClient(socketUrl, {
           transports: ["websocket", "polling"],
         }),
         roomId,
