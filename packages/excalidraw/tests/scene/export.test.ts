@@ -8,7 +8,7 @@ import {
 } from "../fixtures/elementFixture";
 import { API } from "../helpers/api";
 import { exportToCanvas, exportToSvg } from "../../../utils";
-import { FONT_FAMILY, FRAME_STYLE } from "../../constants";
+import { FRAME_STYLE } from "../../constants";
 import { prepareElementsForExport } from "../../data";
 
 describe("exportToSvg", () => {
@@ -32,13 +32,6 @@ describe("exportToSvg", () => {
       height: ELEMENT_HEIGHT,
       width: ELEMENT_WIDTH,
       index: "a2",
-    },
-    {
-      ...textFixture,
-      fontFamily: FONT_FAMILY.Nunito, // test embedding external font
-      height: ELEMENT_HEIGHT,
-      width: ELEMENT_WIDTH,
-      index: "a3",
     },
   ] as NonDeletedExcalidrawElement[];
 

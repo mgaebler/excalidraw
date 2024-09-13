@@ -159,11 +159,11 @@ describe("regression tests", () => {
 
     mouse.down(10, 10);
     mouse.up(10, 10);
-    togglePopover("Background");
+    togglePopover("Hintergrund");
     UI.clickOnTestId("color-yellow");
     UI.clickOnTestId("color-red");
 
-    togglePopover("Stroke");
+    togglePopover("Strich");
     UI.clickOnTestId("color-blue");
     expect(API.getSelectedElement().backgroundColor).toBe("#ffc9c9");
     expect(API.getSelectedElement().strokeColor).toBe("#1971c2");
@@ -969,7 +969,7 @@ describe("regression tests", () => {
       UI.clickTool("rectangle");
       // change background color since default is transparent
       // and transparent elements can't be selected by clicking inside of them
-      togglePopover("Background");
+      togglePopover("Hintergrund");
       UI.clickOnTestId("color-red");
       mouse.down();
       mouse.up(1000, 1000);

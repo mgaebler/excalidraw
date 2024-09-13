@@ -256,7 +256,7 @@ describe("history", () => {
       await render(<Excalidraw handleKeyboardGlobally={true} />);
 
       const rect = UI.createElement("rectangle", { x: 10 });
-      togglePopover("Background");
+      togglePopover("Hintergrund");
       UI.clickOnTestId("color-red");
       UI.clickOnTestId("color-blue");
 
@@ -1009,7 +1009,7 @@ describe("history", () => {
         }),
       ]);
 
-      togglePopover("Stroke");
+      togglePopover("Strich");
       UI.clickOnTestId("color-red");
       mouse.down(40, -20);
       mouse.up(50, 10);
@@ -1297,7 +1297,7 @@ describe("history", () => {
         fireEvent.click(
           queryByText(
             document.querySelector(".context-menu") as HTMLElement,
-            "Bind text to the container",
+            "Text an Container binden",
           )!,
         );
 
@@ -1842,7 +1842,7 @@ describe("history", () => {
 
     it("should not override remote changes on different elements", async () => {
       UI.createElement("rectangle", { x: 10 });
-      togglePopover("Background");
+      togglePopover("Hintergrund");
       UI.clickOnTestId("color-red");
 
       expect(API.getUndoStack().length).toBe(2);
@@ -1886,7 +1886,7 @@ describe("history", () => {
 
     it("should not override remote changes on different properties", async () => {
       UI.createElement("rectangle", { x: 10 });
-      togglePopover("Background");
+      togglePopover("Hintergrund");
       UI.clickOnTestId("color-red");
 
       expect(API.getUndoStack().length).toBe(2);
@@ -1922,7 +1922,7 @@ describe("history", () => {
     // This is due to the fact that deltas are updated in `applyLatestChanges`.
     it("should update history entries after remote changes on the same properties", async () => {
       UI.createElement("rectangle", { x: 10 });
-      togglePopover("Background");
+      togglePopover("Hintergrund");
       UI.clickOnTestId("color-red");
       UI.clickOnTestId("color-blue");
 
@@ -2319,7 +2319,7 @@ describe("history", () => {
 
     it("should iterate through the history when when element change relates to remotely deleted element", async () => {
       UI.createElement("rectangle", { x: 10 });
-      togglePopover("Background");
+      togglePopover("Hintergrund");
       UI.clickOnTestId("color-red");
 
       expect(API.getUndoStack().length).toBe(2);
@@ -2375,7 +2375,7 @@ describe("history", () => {
       const rect1 = UI.createElement("rectangle", { x: 10 });
 
       const rect2 = UI.createElement("rectangle", { x: 20 });
-      togglePopover("Background");
+      togglePopover("Hintergrund");
       UI.clickOnTestId("color-red");
 
       const rect3 = UI.createElement("rectangle", { x: 30, y: 30 });
