@@ -1,3 +1,40 @@
+# Excalidraw without firebase
+
+This is a fork from the [excalidraw project](https://github.com/excalidraw/excalidraw) with changes inspired and partly taken from [Kilian Decaderincourt](https://gitlab.com/kiliandeca/excalidraw-fork) to enable support for rooms without using firebase.<br />
+
+## Setup with docker
+
+Please copy the .env.development.default or .env.production.default file to .env (or with environment without default at the end) and change it according to your needs, see [react-scripts](https://create-react-app.dev/docs/adding-custom-environment-variables/).
+
+### Development
+
+```
+docker-compose up -d
+docker-compose exec excalidraw yarn install
+docker-compose exec excalidraw yarn start --host
+```
+
+Hint: Collab mode requires a secure context (https). Localhost works as well, but not http over local network.
+
+#### Commands
+
+| Command            | Description                       |
+| ------------------ | --------------------------------- |
+| `yarn`             | Install the dependencies          |
+| `yarn start`       | Run the project                   |
+| `yarn fix`         | Reformat all files with Prettier  |
+| `yarn test`        | Run tests                         |
+| `yarn test:update` | Update test snapshots             |
+| `yarn test:code`   | Test for formatting with Prettier |
+
+### Production
+
+Note: The default port of nginx changed from 80 to 8080.
+
+```
+docker-compose -f docker-compose-prod.yml up -d
+```
+
 <a href="https://excalidraw.com/" target="_blank" rel="noopener">
   <picture>
     <source media="(prefers-color-scheme: dark)" alt="Excalidraw" srcset="https://excalidraw.nyc3.cdn.digitaloceanspaces.com/github/excalidraw_github_cover_2_dark.png" />
