@@ -65,24 +65,14 @@ import {
   getCollaborationLink,
   getSyncableElements,
 } from "../data";
-import {
-  encodeFilesForUpload,
-  FileManager,
-  updateStaleImageStatuses,
-} from "../data/FileManager";
-import { LocalData } from "../data/LocalData";
-import {
-  isSavedToFirebase,
-  loadFilesFromFirebase,
-  loadFromFirebase,
-  saveFilesToFirebase,
-  saveToFirebase,
-} from "../data/firebase";
+import { isSavedToFirebase } from "../data/firebase";
 import {
   importUsernameFromLocalStorage,
   saveUsernameToLocalStorage,
 } from "../data/localStorage";
 import { resetBrowserStateVersions } from "../data/tabSync";
+import { LocalData } from "../data/LocalData";
+import { getStorageBackend } from "../data/config";
 
 import { collabErrorIndicatorAtom } from "./CollabError";
 import Portal from "./Portal";
@@ -91,6 +81,7 @@ import type {
   SocketUpdateDataSource,
   SyncableExcalidrawElement,
 } from "../data";
+import { encodeFilesForUpload, FileManager, updateStaleImageStatuses } from "excalidraw-app/data/FileManager";
 
 export const collabAPIAtom = atom<CollabAPI | null>(null);
 export const isCollaboratingAtom = atom(false);
@@ -153,7 +144,12 @@ class Collab extends PureComponent<CollabProps, CollabState> {
           throw new AbortError();
         }
 
-        return loadFilesFromFirebase(`files/rooms/${roomId}`, roomKey, fileIds);
+        const storageBackend = await getStorageBackend();
+        return storageBackend.loadFilesFromStorageBackend(
+          `files/rooms/${roomId}`,
+          roomKey,
+          fileIds,
+        );
       },
       saveFiles: async ({ addedFiles }) => {
         const { roomId, roomKey } = this.portal;
@@ -161,14 +157,16 @@ class Collab extends PureComponent<CollabProps, CollabState> {
           throw new AbortError();
         }
 
-        const { savedFiles, erroredFiles } = await saveFilesToFirebase({
-          prefix: `${FIREBASE_STORAGE_PREFIXES.collabFiles}/${roomId}`,
-          files: await encodeFilesForUpload({
-            files: addedFiles,
-            encryptionKey: roomKey,
-            maxBytes: FILE_UPLOAD_MAX_BYTES,
-          }),
-        });
+        const storageBackend = await getStorageBackend();
+        const { savedFiles, erroredFiles } =
+          await storageBackend.saveFilesToStorageBackend({
+            prefix: `${FIREBASE_STORAGE_PREFIXES.collabFiles}/${roomId}`,
+            files: await encodeFilesForUpload({
+              files: addedFiles,
+              encryptionKey: roomKey,
+              maxBytes: FILE_UPLOAD_MAX_BYTES,
+            }),
+          });
 
         return {
           savedFiles: savedFiles.reduce(
@@ -312,7 +310,8 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     syncableElements: readonly SyncableExcalidrawElement[],
   ) => {
     try {
-      const storedElements = await saveToFirebase(
+      const storageBackend = await getStorageBackend();
+      const storedElements = await storageBackend.saveToStorageBackend(
         this.portal,
         syncableElements,
         this.excalidrawAPI.getAppState(),
@@ -431,7 +430,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
           !element.isDeleted &&
           (opts.forceFetchFiles
             ? element.status !== "pending" ||
-              Date.now() - element.updated > 10000
+            Date.now() - element.updated > 10000
             : element.status === "saved")
         );
       })
@@ -696,9 +695,9 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     roomLinkData,
   }:
     | {
-        fetchScene: true;
-        roomLinkData: { roomId: string; roomKey: string } | null;
-      }
+      fetchScene: true;
+      roomLinkData: { roomId: string; roomKey: string } | null;
+    }
     | { fetchScene: false; roomLinkData?: null }) => {
     clearTimeout(this.socketInitializationTimer!);
     if (this.portal.socket && this.fallbackInitializationHandler) {
@@ -711,7 +710,8 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       this.excalidrawAPI.resetScene();
 
       try {
-        const elements = await loadFromFirebase(
+        const storageBackend = await getStorageBackend();
+        const elements = await storageBackend.loadFromStorageBackend(
           roomLinkData.roomId,
           roomLinkData.roomKey,
           this.portal.socket,
