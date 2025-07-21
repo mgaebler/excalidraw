@@ -3,42 +3,31 @@ services:
     stdin_open: true
     build:
       context: .
-      target: development
-      args:
-        - NODE_ENV=development
+      target: production
     container_name: excalidraw
     ports:
-      - "3000:3000"
-    restart: on-failure
+      - "5010:8080"
+    restart: always
     healthcheck:
       disable: true
     environment:
-      - NODE_ENV=development
-    volumes:
-      - node_modules:/opt/node_app/node_modules
-      - ./:/opt/node_app/
+      - NODE_ENV=production
 
   excalidraw-storage-backend:
     build:
       context: https://github.com/kitsteam/excalidraw-storage-backend.git#main
       target: production
-      # When testing locally, you can also checkout the repository and start the backend manually:
-      # context: ../kits/excalidraw-storage-backend
-      # target: development
-    volumes:
-      - ../kits/excalidraw-storage-backend/:/home/node/app
-    stdin_open: true
-    container_name: excalidraw-storage-backend
     ports:
-      - "8080:8080"
+      - "5011:8080"
+    restart: always
     environment:
-      STORAGE_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT:-5432}/${POSTGRES_DB:-excalidraw-dev}
+      STORAGE_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT:-5432}/${POSTGRES_DB:-excalidraw-prod}
 
   excalidraw-room:
     image: excalidraw/excalidraw-room
-    container_name: excalidraw-room
+    restart: always
     ports:
-      - "5001:80"
+      - "5012:80"
 
   postgres:
     image: postgres:15-alpine
@@ -47,15 +36,15 @@ services:
     # command: -c ssl=on -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
-      POSTGRES_DB: ${POSTGRES_DB:-excalidraw-dev}
+      POSTGRES_DB: ${POSTGRES_DB:-excalidraw-prod}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_PORT: ${POSTGRES_PORT:-5432}
       POSTGRES_USER: ${POSTGRES_USER}
     volumes:
       - postgres_data:/var/lib/postgresql/data/pgdata
-    container_name: excalidraw-postgres
-    ports:
-      - "5432:5432"
+    # ports:
+    #   - "5432:5432"
+
 volumes:
+  notused:
   postgres_data:
-  node_modules:
