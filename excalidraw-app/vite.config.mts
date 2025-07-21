@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
     server: {
       port: Number(envVars.VITE_APP_PORT || 3000),
       // open the browser
-      open: true,
+      open: false,
     },
     // We need to specify the envDir since now there are no
     //more located in parallel with the vite.config.ts file but in parent dir
@@ -112,6 +112,8 @@ export default defineConfig(({ mode }) => {
         },
 
         workbox: {
+          maximumFileSizeToCacheInBytes: 5 * 1024 ** 2,
+          
           // don't precache fonts, locales and separate chunks
           globIgnores: [
             "fonts.css",
