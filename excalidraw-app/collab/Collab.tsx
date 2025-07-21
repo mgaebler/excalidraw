@@ -48,13 +48,7 @@ import {
   getCollaborationLink,
   getSyncableElements,
 } from "../data";
-import {
-  isSavedToFirebase,
-  loadFilesFromFirebase,
-  loadFromFirebase,
-  saveFilesToFirebase,
-  saveToFirebase,
-} from "../data/firebase";
+import { isSavedToFirebase } from "../data/firebase";
 import {
   importUsernameFromLocalStorage,
   saveUsernameToLocalStorage,
@@ -83,6 +77,7 @@ import { LocalData } from "../data/LocalData";
 import { appJotaiStore, atom } from "../app-jotai";
 import type { Mutable, ValueOf } from "@excalidraw/excalidraw/utility-types";
 import { getVisibleSceneBounds } from "@excalidraw/excalidraw/element/bounds";
+import { getStorageBackend } from "../data/config";
 import { withBatchedUpdates } from "@excalidraw/excalidraw/reactUtils";
 import { collabErrorIndicatorAtom } from "./CollabError";
 import type {
@@ -151,7 +146,12 @@ class Collab extends PureComponent<CollabProps, CollabState> {
           throw new AbortError();
         }
 
-        return loadFilesFromFirebase(`files/rooms/${roomId}`, roomKey, fileIds);
+        const storageBackend = await getStorageBackend();
+        return storageBackend.loadFilesFromStorageBackend(
+          `files/rooms/${roomId}`,
+          roomKey,
+          fileIds,
+        );
       },
       saveFiles: async ({ addedFiles }) => {
         const { roomId, roomKey } = this.portal;
@@ -159,14 +159,16 @@ class Collab extends PureComponent<CollabProps, CollabState> {
           throw new AbortError();
         }
 
-        const { savedFiles, erroredFiles } = await saveFilesToFirebase({
-          prefix: `${FIREBASE_STORAGE_PREFIXES.collabFiles}/${roomId}`,
-          files: await encodeFilesForUpload({
-            files: addedFiles,
-            encryptionKey: roomKey,
-            maxBytes: FILE_UPLOAD_MAX_BYTES,
-          }),
-        });
+        const storageBackend = await getStorageBackend();
+        const { savedFiles, erroredFiles } =
+          await storageBackend.saveFilesToStorageBackend({
+            prefix: `${FIREBASE_STORAGE_PREFIXES.collabFiles}/${roomId}`,
+            files: await encodeFilesForUpload({
+              files: addedFiles,
+              encryptionKey: roomKey,
+              maxBytes: FILE_UPLOAD_MAX_BYTES,
+            }),
+          });
 
         return {
           savedFiles: savedFiles.reduce(
@@ -304,7 +306,8 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     syncableElements: readonly SyncableExcalidrawElement[],
   ) => {
     try {
-      const storedElements = await saveToFirebase(
+      const storageBackend = await getStorageBackend();
+      const storedElements = await storageBackend.saveToStorageBackend(
         this.portal,
         syncableElements,
         this.excalidrawAPI.getAppState(),
@@ -703,7 +706,8 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       this.excalidrawAPI.resetScene();
 
       try {
-        const elements = await loadFromFirebase(
+        const storageBackend = await getStorageBackend();
+        const elements = await storageBackend.loadFromStorageBackend(
           roomLinkData.roomId,
           roomLinkData.roomKey,
           this.portal.socket,
