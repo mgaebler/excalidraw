@@ -151,7 +151,7 @@ export const loadFromHttpStorage = async (
   roomId: string,
   roomKey: string,
   socket: Socket | null,
-): Promise<readonly ExcalidrawElement[] | null> => {
+): Promise<readonly SyncableExcalidrawElement[] | null> => {
   const getResponse = await fetch(`${httpStorageBackendUrl}/rooms/${roomId}`);
 
   const buffer = await getResponse.arrayBuffer();
