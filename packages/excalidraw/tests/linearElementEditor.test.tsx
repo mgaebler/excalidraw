@@ -223,9 +223,7 @@ describe("Test Linear Elements", () => {
       clientX: midpoint[0],
       clientY: midpoint[1],
     });
-    fireEvent.click(
-      queryByText(contextMenu as HTMLElement, "Linie bearbeiten")!,
-    );
+    fireEvent.click(queryByText(contextMenu as HTMLElement, "Edit line")!);
 
     expect(h.state.editingLinearElement?.elementId).toEqual(h.elements[0].id);
   });
@@ -306,7 +304,7 @@ describe("Test Linear Elements", () => {
       );
 
       // update roundness
-      fireEvent.click(screen.getByTitle("Rund"));
+      fireEvent.click(screen.getByTitle("Round"));
 
       expect(renderInteractiveScene.mock.calls.length).toMatchInlineSnapshot(
         `9`,
@@ -1291,7 +1289,7 @@ describe("Test Linear Elements", () => {
       let contextMenu = document.querySelector(".context-menu");
 
       fireEvent.click(
-        queryByText(contextMenu as HTMLElement, "Text an Container binden")!,
+        queryByText(contextMenu as HTMLElement, "Bind text to the container")!,
       );
       expect(container.boundElements).toStrictEqual([
         { id: h.elements[1].id, type: "text" },
@@ -1314,7 +1312,7 @@ describe("Test Linear Elements", () => {
         clientY: 30,
       });
       contextMenu = document.querySelector(".context-menu");
-      fireEvent.click(queryByText(contextMenu as HTMLElement, "Text lösen")!);
+      fireEvent.click(queryByText(contextMenu as HTMLElement, "Unbind text")!);
       expect(container.boundElements).toEqual([]);
       expect(text).toEqual(
         expect.objectContaining({

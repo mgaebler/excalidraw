@@ -37,20 +37,20 @@ describe("actionStyles", () => {
     mouse.up(20, 20);
 
     // Change some styles of second rectangle
-    togglePopover("Strich");
+    togglePopover("Stroke");
     UI.clickOnTestId("color-red");
-    togglePopover("Hintergrund");
+    togglePopover("Background");
     UI.clickOnTestId("color-blue");
     // Fill style
-    fireEvent.click(screen.getByTitle("Kreuzschraffiert"));
+    fireEvent.click(screen.getByTitle("Cross-hatch"));
     // Stroke width
-    fireEvent.click(screen.getByTitle("Fett"));
+    fireEvent.click(screen.getByTitle("Bold"));
     // Stroke style
-    fireEvent.click(screen.getByTitle("Gepunktet"));
+    fireEvent.click(screen.getByTitle("Dotted"));
     // Roughness
-    fireEvent.click(screen.getByTitle("Karikaturist"));
+    fireEvent.click(screen.getByTitle("Cartoonist"));
     // Opacity
-    fireEvent.change(screen.getByLabelText("Deckkraft"), {
+    fireEvent.change(screen.getByLabelText("Opacity"), {
       target: { value: "60" },
     });
 

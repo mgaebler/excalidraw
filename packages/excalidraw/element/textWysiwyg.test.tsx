@@ -848,7 +848,7 @@ describe("textWysiwyg", () => {
       });
       const contextMenu = document.querySelector(".context-menu");
       fireEvent.click(
-        queryByText(contextMenu as HTMLElement, "Text an Container binden")!,
+        queryByText(contextMenu as HTMLElement, "Bind text to the container")!,
       );
       const text = h.elements[1] as ExcalidrawTextElementWithContainer;
       expect(rectangle.boundElements).toStrictEqual([
@@ -979,7 +979,7 @@ describe("textWysiwyg", () => {
         clientY: 30,
       });
       const contextMenu = document.querySelector(".context-menu");
-      fireEvent.click(queryByText(contextMenu as HTMLElement, "Text lösen")!);
+      fireEvent.click(queryByText(contextMenu as HTMLElement, "Unbind text")!);
       expect(h.elements[0].boundElements).toEqual([]);
       expect((h.elements[1] as ExcalidrawTextElement).containerId).toEqual(
         null,
@@ -1036,8 +1036,8 @@ describe("textWysiwyg", () => {
 
       editor.select();
 
-      fireEvent.click(screen.getByTitle("Links"));
-      fireEvent.click(screen.getByTitle("Untere Kanten"));
+      fireEvent.click(screen.getByTitle("Left"));
+      fireEvent.click(screen.getByTitle("Align bottom"));
       Keyboard.exitTextEditor(editor);
 
       // should left align horizontally and bottom vertically after resize
@@ -1055,8 +1055,8 @@ describe("textWysiwyg", () => {
 
       editor.select();
 
-      fireEvent.click(screen.getByTitle("Rechts"));
-      fireEvent.click(screen.getByTitle("Obere Kanten"));
+      fireEvent.click(screen.getByTitle("Right"));
+      fireEvent.click(screen.getByTitle("Align top"));
 
       Keyboard.exitTextEditor(editor);
 
@@ -1219,7 +1219,7 @@ describe("textWysiwyg", () => {
       let contextMenu = document.querySelector(".context-menu");
 
       fireEvent.click(
-        queryByText(contextMenu as HTMLElement, "Text an Container binden")!,
+        queryByText(contextMenu as HTMLElement, "Bind text to the container")!,
       );
 
       expect((h.elements[1] as ExcalidrawTextElementWithContainer).text).toBe(
@@ -1231,7 +1231,7 @@ describe("textWysiwyg", () => {
         clientY: 30,
       });
       contextMenu = document.querySelector(".context-menu");
-      fireEvent.click(queryByText(contextMenu as HTMLElement, "Text lösen")!);
+      fireEvent.click(queryByText(contextMenu as HTMLElement, "Unbind text")!);
       expect(h.elements[0].boundElements).toEqual([]);
       expect(getOriginalContainerHeightFromCache(container.id)).toBe(null);
 
@@ -1281,7 +1281,7 @@ describe("textWysiwyg", () => {
       ).toEqual(FONT_FAMILY["Comic Shanns"]);
       expect(getOriginalContainerHeightFromCache(rectangle.id)).toBe(75);
 
-      fireEvent.click(screen.getByTitle(/Sehr groß/i));
+      fireEvent.click(screen.getByTitle(/Very large/i));
       expect(
         (h.elements[1] as ExcalidrawTextElementWithContainer).fontSize,
       ).toEqual(36);
@@ -1316,7 +1316,7 @@ describe("textWysiwyg", () => {
       ).toEqual(FONT_FAMILY.Nunito);
       expect(
         (h.elements[1] as ExcalidrawTextElementWithContainer).lineHeight,
-      ).toEqual(1.25);
+      ).toEqual(1.35);
     });
 
     describe("should align correctly", () => {
@@ -1334,8 +1334,8 @@ describe("textWysiwyg", () => {
       });
 
       it("when top left", async () => {
-        fireEvent.click(screen.getByTitle("Links"));
-        fireEvent.click(screen.getByTitle("Obere Kanten"));
+        fireEvent.click(screen.getByTitle("Left"));
+        fireEvent.click(screen.getByTitle("Align top"));
         expect([h.elements[1].x, h.elements[1].y]).toMatchInlineSnapshot(`
           [
             15,
@@ -1345,8 +1345,8 @@ describe("textWysiwyg", () => {
       });
 
       it("when top center", async () => {
-        fireEvent.click(screen.getByTitle("Zentriert"));
-        fireEvent.click(screen.getByTitle("Obere Kanten"));
+        fireEvent.click(screen.getByTitle("Center"));
+        fireEvent.click(screen.getByTitle("Align top"));
         expect([h.elements[1].x, h.elements[1].y]).toMatchInlineSnapshot(`
           [
             30,
@@ -1356,8 +1356,8 @@ describe("textWysiwyg", () => {
       });
 
       it("when top right", async () => {
-        fireEvent.click(screen.getByTitle("Rechts"));
-        fireEvent.click(screen.getByTitle("Obere Kanten"));
+        fireEvent.click(screen.getByTitle("Right"));
+        fireEvent.click(screen.getByTitle("Align top"));
 
         expect([h.elements[1].x, h.elements[1].y]).toMatchInlineSnapshot(`
           [
@@ -1368,8 +1368,8 @@ describe("textWysiwyg", () => {
       });
 
       it("when center left", async () => {
-        fireEvent.click(screen.getByTitle("Vertikal zentrieren"));
-        fireEvent.click(screen.getByTitle("Links"));
+        fireEvent.click(screen.getByTitle("Center vertically"));
+        fireEvent.click(screen.getByTitle("Left"));
         expect([h.elements[1].x, h.elements[1].y]).toMatchInlineSnapshot(`
           [
             15,
@@ -1379,8 +1379,8 @@ describe("textWysiwyg", () => {
       });
 
       it("when center center", async () => {
-        fireEvent.click(screen.getByTitle("Zentriert"));
-        fireEvent.click(screen.getByTitle("Vertikal zentrieren"));
+        fireEvent.click(screen.getByTitle("Center"));
+        fireEvent.click(screen.getByTitle("Center vertically"));
 
         expect([h.elements[1].x, h.elements[1].y]).toMatchInlineSnapshot(`
           [
@@ -1391,8 +1391,8 @@ describe("textWysiwyg", () => {
       });
 
       it("when center right", async () => {
-        fireEvent.click(screen.getByTitle("Rechts"));
-        fireEvent.click(screen.getByTitle("Vertikal zentrieren"));
+        fireEvent.click(screen.getByTitle("Right"));
+        fireEvent.click(screen.getByTitle("Center vertically"));
 
         expect([h.elements[1].x, h.elements[1].y]).toMatchInlineSnapshot(`
           [
@@ -1403,8 +1403,8 @@ describe("textWysiwyg", () => {
       });
 
       it("when bottom left", async () => {
-        fireEvent.click(screen.getByTitle("Links"));
-        fireEvent.click(screen.getByTitle("Untere Kanten"));
+        fireEvent.click(screen.getByTitle("Left"));
+        fireEvent.click(screen.getByTitle("Align bottom"));
 
         expect([h.elements[1].x, h.elements[1].y]).toMatchInlineSnapshot(`
           [
@@ -1415,8 +1415,8 @@ describe("textWysiwyg", () => {
       });
 
       it("when bottom center", async () => {
-        fireEvent.click(screen.getByTitle("Zentriert"));
-        fireEvent.click(screen.getByTitle("Untere Kanten"));
+        fireEvent.click(screen.getByTitle("Center"));
+        fireEvent.click(screen.getByTitle("Align bottom"));
         expect([h.elements[1].x, h.elements[1].y]).toMatchInlineSnapshot(`
           [
             30,
@@ -1426,8 +1426,8 @@ describe("textWysiwyg", () => {
       });
 
       it("when bottom right", async () => {
-        fireEvent.click(screen.getByTitle("Rechts"));
-        fireEvent.click(screen.getByTitle("Untere Kanten"));
+        fireEvent.click(screen.getByTitle("Right"));
+        fireEvent.click(screen.getByTitle("Align bottom"));
         expect([h.elements[1].x, h.elements[1].y]).toMatchInlineSnapshot(`
           [
             45,
@@ -1448,7 +1448,7 @@ describe("textWysiwyg", () => {
       );
 
       editor.select();
-      fireEvent.click(screen.getByTitle("Links"));
+      fireEvent.click(screen.getByTitle("Left"));
 
       Keyboard.exitTextEditor(editor);
 
@@ -1470,7 +1470,7 @@ describe("textWysiwyg", () => {
 
       const contextMenu = document.querySelector(".context-menu");
       fireEvent.click(
-        queryByText(contextMenu as HTMLElement, "Text in Container einbetten")!,
+        queryByText(contextMenu as HTMLElement, "Wrap text in a container")!,
       );
       expect(h.elements.length).toBe(3);
 
@@ -1532,7 +1532,7 @@ describe("textWysiwyg", () => {
         (h.elements[1] as ExcalidrawTextElementWithContainer).verticalAlign,
       ).toBe(VERTICAL_ALIGN.MIDDLE);
 
-      fireEvent.click(screen.getByTitle("Untere Kanten"));
+      fireEvent.click(screen.getByTitle("Align bottom"));
 
       Keyboard.exitTextEditor(editor);
 

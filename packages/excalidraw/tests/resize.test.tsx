@@ -56,7 +56,7 @@ beforeEach(async () => {
   // The bounds of hand-drawn linear elements may change after flipping, so
   // removing this style for testing
   UI.clickTool("arrow");
-  UI.clickByTitle("Architekt");
+  UI.clickByTitle("Architect");
   UI.clickTool("selection");
 });
 
@@ -888,7 +888,7 @@ describe("multiple selection", () => {
 
   it("resizes with linear elements > 2 points", async () => {
     UI.clickTool("line");
-    UI.clickByTitle("Scharf");
+    UI.clickByTitle("Sharp");
 
     const line = UI.createElement("line", {
       x: 60,
@@ -1061,7 +1061,7 @@ describe("multiple selection", () => {
     const topArrowLabel = await UI.editText(topArrow.get(), "lorem ipsum");
 
     UI.clickTool("text");
-    UI.clickByTitle("Groß");
+    UI.clickByTitle("Large");
     const bottomArrow = UI.createElement("arrow", {
       x: 0,
       y: 80,
@@ -1132,7 +1132,7 @@ describe("multiple selection", () => {
     await UI.editText(topText, "lorem ipsum");
 
     UI.clickTool("text");
-    UI.clickByTitle("Groß");
+    UI.clickByTitle("Large");
     const bottomText = UI.createElement("text", { position: 40 });
     await UI.editText(bottomText, "dolor\nsit amet");
 

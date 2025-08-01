@@ -2716,7 +2716,7 @@ exports[`regression tests > change the properties of a shape > [end of test] app
   "currentChartType": "bar",
   "currentHoveredFontFamily": null,
   "currentItemArrowType": "round",
-  "currentItemBackgroundColor": "#ffc9c9",
+  "currentItemBackgroundColor": "transparent",
   "currentItemEndArrowhead": "arrow",
   "currentItemFillStyle": "solid",
   "currentItemFontFamily": 5,
@@ -2725,7 +2725,7 @@ exports[`regression tests > change the properties of a shape > [end of test] app
   "currentItemRoughness": 1,
   "currentItemRoundness": "round",
   "currentItemStartArrowhead": null,
-  "currentItemStrokeColor": "#1971c2",
+  "currentItemStrokeColor": "#1e1e1e",
   "currentItemStrokeStyle": "solid",
   "currentItemStrokeWidth": 2,
   "currentItemTextAlign": "left",
@@ -2771,7 +2771,7 @@ exports[`regression tests > change the properties of a shape > [end of test] app
   "offsetTop": 0,
   "openDialog": null,
   "openMenu": null,
-  "openPopup": "elementStroke",
+  "openPopup": null,
   "openSidebar": null,
   "originSnapOffset": null,
   "pasteDialog": {
@@ -2875,79 +2875,13 @@ History {
         "updated": Map {},
       },
     },
-    HistoryEntry {
-      "appStateChange": AppStateChange {
-        "delta": Delta {
-          "deleted": {},
-          "inserted": {},
-        },
-      },
-      "elementsChange": ElementsChange {
-        "added": Map {},
-        "removed": Map {},
-        "updated": Map {
-          "id0" => Delta {
-            "deleted": {
-              "backgroundColor": "#ffec99",
-            },
-            "inserted": {
-              "backgroundColor": "transparent",
-            },
-          },
-        },
-      },
-    },
-    HistoryEntry {
-      "appStateChange": AppStateChange {
-        "delta": Delta {
-          "deleted": {},
-          "inserted": {},
-        },
-      },
-      "elementsChange": ElementsChange {
-        "added": Map {},
-        "removed": Map {},
-        "updated": Map {
-          "id0" => Delta {
-            "deleted": {
-              "backgroundColor": "#ffc9c9",
-            },
-            "inserted": {
-              "backgroundColor": "#ffec99",
-            },
-          },
-        },
-      },
-    },
-    HistoryEntry {
-      "appStateChange": AppStateChange {
-        "delta": Delta {
-          "deleted": {},
-          "inserted": {},
-        },
-      },
-      "elementsChange": ElementsChange {
-        "added": Map {},
-        "removed": Map {},
-        "updated": Map {
-          "id0" => Delta {
-            "deleted": {
-              "strokeColor": "#1971c2",
-            },
-            "inserted": {
-              "strokeColor": "#1e1e1e",
-            },
-          },
-        },
-      },
-    },
   ],
 }
 `;
 
 exports[`regression tests > change the properties of a shape > [end of test] number of elements 1`] = `0`;
 
-exports[`regression tests > change the properties of a shape > [end of test] number of renders 1`] = `9`;
+exports[`regression tests > change the properties of a shape > [end of test] number of renders 1`] = `6`;
 
 exports[`regression tests > click on an element and drag it > [dragged] appState 1`] = `
 {
@@ -7199,7 +7133,7 @@ exports[`regression tests > given a selected element A and a not selected elemen
     "customType": null,
     "lastActiveTool": null,
     "locked": false,
-    "type": "selection",
+    "type": "rectangle",
   },
   "collaborators": Map {},
   "contextMenu": null,
@@ -7207,7 +7141,7 @@ exports[`regression tests > given a selected element A and a not selected elemen
   "currentChartType": "bar",
   "currentHoveredFontFamily": null,
   "currentItemArrowType": "round",
-  "currentItemBackgroundColor": "#ffc9c9",
+  "currentItemBackgroundColor": "transparent",
   "currentItemEndArrowhead": "arrow",
   "currentItemFillStyle": "solid",
   "currentItemFontFamily": 5,
@@ -7262,7 +7196,7 @@ exports[`regression tests > given a selected element A and a not selected elemen
   "offsetTop": 0,
   "openDialog": null,
   "openMenu": null,
-  "openPopup": "elementBackground",
+  "openPopup": null,
   "openSidebar": null,
   "originSnapOffset": null,
   "pasteDialog": {
@@ -7272,18 +7206,13 @@ exports[`regression tests > given a selected element A and a not selected elemen
   "penDetected": false,
   "penMode": false,
   "pendingImageElementId": null,
-  "previousSelectedElementIds": {
-    "id0": true,
-  },
+  "previousSelectedElementIds": {},
   "resizingElement": null,
   "scrollX": 0,
   "scrollY": 0,
   "scrolledOutside": false,
   "searchMatches": [],
-  "selectedElementIds": {
-    "id0": true,
-    "id1": true,
-  },
+  "selectedElementIds": {},
   "selectedElementsAreBeingDragged": false,
   "selectedGroupIds": {},
   "selectedLinearElement": null,
@@ -7317,158 +7246,13 @@ History {
     "subscribers": [],
   },
   "redoStack": [],
-  "undoStack": [
-    HistoryEntry {
-      "appStateChange": AppStateChange {
-        "delta": Delta {
-          "deleted": {
-            "selectedElementIds": {
-              "id0": true,
-            },
-          },
-          "inserted": {
-            "selectedElementIds": {},
-          },
-        },
-      },
-      "elementsChange": ElementsChange {
-        "added": Map {},
-        "removed": Map {
-          "id0" => Delta {
-            "deleted": {
-              "angle": 0,
-              "backgroundColor": "#ffc9c9",
-              "boundElements": null,
-              "customData": undefined,
-              "fillStyle": "solid",
-              "frameId": null,
-              "groupIds": [],
-              "height": 1000,
-              "index": "a0",
-              "isDeleted": false,
-              "link": null,
-              "locked": false,
-              "opacity": 100,
-              "roughness": 1,
-              "roundness": {
-                "type": 3,
-              },
-              "strokeColor": "#1e1e1e",
-              "strokeStyle": "solid",
-              "strokeWidth": 2,
-              "type": "rectangle",
-              "width": 1000,
-              "x": 0,
-              "y": 0,
-            },
-            "inserted": {
-              "isDeleted": true,
-            },
-          },
-        },
-        "updated": Map {},
-      },
-    },
-    HistoryEntry {
-      "appStateChange": AppStateChange {
-        "delta": Delta {
-          "deleted": {
-            "selectedElementIds": {
-              "id1": true,
-            },
-          },
-          "inserted": {
-            "selectedElementIds": {
-              "id0": true,
-            },
-          },
-        },
-      },
-      "elementsChange": ElementsChange {
-        "added": Map {},
-        "removed": Map {
-          "id1" => Delta {
-            "deleted": {
-              "angle": 0,
-              "backgroundColor": "#ffc9c9",
-              "boundElements": null,
-              "customData": undefined,
-              "fillStyle": "solid",
-              "frameId": null,
-              "groupIds": [],
-              "height": 1000,
-              "index": "a1",
-              "isDeleted": false,
-              "link": null,
-              "locked": false,
-              "opacity": 100,
-              "roughness": 1,
-              "roundness": {
-                "type": 2,
-              },
-              "strokeColor": "#1e1e1e",
-              "strokeStyle": "solid",
-              "strokeWidth": 2,
-              "type": "ellipse",
-              "width": 1000,
-              "x": 500,
-              "y": 500,
-            },
-            "inserted": {
-              "isDeleted": true,
-            },
-          },
-        },
-        "updated": Map {},
-      },
-    },
-    HistoryEntry {
-      "appStateChange": AppStateChange {
-        "delta": Delta {
-          "deleted": {
-            "selectedElementIds": {
-              "id0": true,
-            },
-          },
-          "inserted": {
-            "selectedElementIds": {
-              "id1": true,
-            },
-          },
-        },
-      },
-      "elementsChange": ElementsChange {
-        "added": Map {},
-        "removed": Map {},
-        "updated": Map {},
-      },
-    },
-    HistoryEntry {
-      "appStateChange": AppStateChange {
-        "delta": Delta {
-          "deleted": {
-            "selectedElementIds": {
-              "id1": true,
-            },
-          },
-          "inserted": {
-            "selectedElementIds": {},
-          },
-        },
-      },
-      "elementsChange": ElementsChange {
-        "added": Map {},
-        "removed": Map {},
-        "updated": Map {},
-      },
-    },
-  ],
+  "undoStack": [],
 }
 `;
 
 exports[`regression tests > given a selected element A and a not selected element B with higher z-index than A and given B partially overlaps A when there's a shift-click on the overlapped section B is added to the selection > [end of test] number of elements 1`] = `0`;
 
-exports[`regression tests > given a selected element A and a not selected element B with higher z-index than A and given B partially overlaps A when there's a shift-click on the overlapped section B is added to the selection > [end of test] number of renders 1`] = `12`;
+exports[`regression tests > given a selected element A and a not selected element B with higher z-index than A and given B partially overlaps A when there's a shift-click on the overlapped section B is added to the selection > [end of test] number of renders 1`] = `4`;
 
 exports[`regression tests > given selected element A with lower z-index than unselected element B and given B is partially over A when clicking intersection between A and B B should be selected on pointer up > [end of test] appState 1`] = `
 {
