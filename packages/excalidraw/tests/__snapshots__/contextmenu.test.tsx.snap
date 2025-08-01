@@ -3144,7 +3144,7 @@ exports[`contextMenu element > selecting 'Paste styles' in context menu pastes s
   "currentItemFillStyle": "cross-hatch",
   "currentItemFontFamily": 5,
   "currentItemFontSize": 20,
-  "currentItemOpacity": 100,
+  "currentItemOpacity": 60,
   "currentItemRoughness": 2,
   "currentItemRoundness": "round",
   "currentItemStartArrowhead": null,
@@ -3194,7 +3194,7 @@ exports[`contextMenu element > selecting 'Paste styles' in context menu pastes s
   "offsetTop": 10,
   "openDialog": null,
   "openMenu": null,
-  "openPopup": "elementBackground",
+  "openPopup": null,
   "openSidebar": null,
   "originSnapOffset": null,
   "pasteDialog": {
@@ -3211,7 +3211,7 @@ exports[`contextMenu element > selecting 'Paste styles' in context menu pastes s
   "scrolledOutside": false,
   "searchMatches": [],
   "selectedElementIds": {
-    "id1": true,
+    "id0": true,
   },
   "selectedElementsAreBeingDragged": false,
   "selectedGroupIds": {},
@@ -3228,7 +3228,9 @@ exports[`contextMenu element > selecting 'Paste styles' in context menu pastes s
   },
   "suggestedBindings": [],
   "theme": "light",
-  "toast": null,
+  "toast": {
+    "message": "Copied styles.",
+  },
   "userToFollow": null,
   "viewBackgroundColor": "#ffffff",
   "viewModeEnabled": false,
@@ -3243,10 +3245,10 @@ exports[`contextMenu element > selecting 'Paste styles' in context menu pastes s
 exports[`contextMenu element > selecting 'Paste styles' in context menu pastes styles > [end of test] element 0 1`] = `
 {
   "angle": 0,
-  "backgroundColor": "transparent",
+  "backgroundColor": "#a5d8ff",
   "boundElements": null,
   "customData": undefined,
-  "fillStyle": "solid",
+  "fillStyle": "cross-hatch",
   "frameId": null,
   "groupIds": [],
   "height": 20,
@@ -3255,19 +3257,19 @@ exports[`contextMenu element > selecting 'Paste styles' in context menu pastes s
   "isDeleted": false,
   "link": null,
   "locked": false,
-  "opacity": 100,
-  "roughness": 1,
+  "opacity": 60,
+  "roughness": 2,
   "roundness": {
     "type": 3,
   },
   "seed": 449462985,
-  "strokeColor": "#1e1e1e",
-  "strokeStyle": "solid",
+  "strokeColor": "#e03131",
+  "strokeStyle": "dotted",
   "strokeWidth": 2,
   "type": "rectangle",
   "updated": 1,
-  "version": 3,
-  "versionNonce": 1150084233,
+  "version": 4,
+  "versionNonce": 941653321,
   "width": 20,
   "x": -10,
   "y": 0,
@@ -3289,7 +3291,7 @@ exports[`contextMenu element > selecting 'Paste styles' in context menu pastes s
   "isDeleted": false,
   "link": null,
   "locked": false,
-  "opacity": 100,
+  "opacity": 60,
   "roughness": 2,
   "roundness": {
     "type": 3,
@@ -3300,8 +3302,8 @@ exports[`contextMenu element > selecting 'Paste styles' in context menu pastes s
   "strokeWidth": 2,
   "type": "rectangle",
   "updated": 1,
-  "version": 8,
-  "versionNonce": 1315507081,
+  "version": 9,
+  "versionNonce": 640725609,
   "width": 20,
   "x": 20,
   "y": 30,
@@ -3532,13 +3534,75 @@ History {
         },
       },
     },
+    HistoryEntry {
+      "appStateChange": AppStateChange {
+        "delta": Delta {
+          "deleted": {},
+          "inserted": {},
+        },
+      },
+      "elementsChange": ElementsChange {
+        "added": Map {},
+        "removed": Map {},
+        "updated": Map {
+          "id1" => Delta {
+            "deleted": {
+              "opacity": 60,
+            },
+            "inserted": {
+              "opacity": 100,
+            },
+          },
+        },
+      },
+    },
+    HistoryEntry {
+      "appStateChange": AppStateChange {
+        "delta": Delta {
+          "deleted": {
+            "selectedElementIds": {
+              "id0": true,
+            },
+          },
+          "inserted": {
+            "selectedElementIds": {
+              "id1": true,
+            },
+          },
+        },
+      },
+      "elementsChange": ElementsChange {
+        "added": Map {},
+        "removed": Map {},
+        "updated": Map {
+          "id0" => Delta {
+            "deleted": {
+              "backgroundColor": "#a5d8ff",
+              "fillStyle": "cross-hatch",
+              "opacity": 60,
+              "roughness": 2,
+              "strokeColor": "#e03131",
+              "strokeStyle": "dotted",
+            },
+            "inserted": {
+              "backgroundColor": "transparent",
+              "fillStyle": "solid",
+              "opacity": 100,
+              "roughness": 1,
+              "strokeColor": "#1e1e1e",
+              "strokeStyle": "solid",
+            },
+          },
+        },
+      },
+    },
   ],
 }
 `;
 
 exports[`contextMenu element > selecting 'Paste styles' in context menu pastes styles > [end of test] number of elements 1`] = `2`;
 
-exports[`contextMenu element > selecting 'Paste styles' in context menu pastes styles > [end of test] number of renders 1`] = `13`;
+exports[`contextMenu element > selecting 'Paste styles' in context menu pastes styles > [end of test] number of renders 1`] = `16`;
 
 exports[`contextMenu element > selecting 'Send backward' in context menu sends element backward > [end of test] appState 1`] = `
 {
