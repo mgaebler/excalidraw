@@ -26,13 +26,14 @@
   display: swap;
 }
 
-@font-face {
+/* Fira Sans - Semi Bold is currently not available */
+/* @font-face {
   font-family: "FiraSans";
   src: url("FiraSans-SemiBold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
   display: swap;
-}
+} */
 
 @font-face {
   font-family: "FiraSans";

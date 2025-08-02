@@ -25,19 +25,24 @@ module.exports.woff2BrowserPlugin = () => {
         @font-face {
           font-family: "FiraSans";
           src: url("FiraSans-Regular.otf") format("opentype");
+          font-weight: 400 600;
+          font-style: normal;
         }
 
         @font-face {
           font-family: "FiraSans";
-          font-weight: light;
           src: url("FiraSans-Light.otf") format("opentype");
+          font-weight: 300;
+          font-style: normal;
         }
 
         @font-face {
           font-family: "FiraSans";
-          font-weight: bold;
           src: url("FiraSans-Bold.otf") format("opentype");
-        }`;
+          font-weight: 700;
+          font-style: normal;
+        }
+        `;
       }
 
       if (!isDev && id.endsWith("excalidraw-app/index.html")) {
